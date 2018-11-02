@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Seongbukgu Share Template</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<meta property="og:url" content="{{ "http://192.168.0.188:7999/share/" + photoid }}" />
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="성북구" />
+	<meta property="og:description" content="성북구 description." />
+	<meta property="og:image" content="{{ "http://192.168.0.188:7999/images" + photourl }}" />
+
+	<style type="text/css">
+
+		html, body {
+			margin:0;
+			font-family: 'Arial';
+		}
+		* {
+			box-sizing: border-box;
+		}
+		.wrapper {
+			display: block;
+			max-width: 300px;
+			margin:0 auto;			
+		}
+		.wrap_img {
+			margin-top: 20px;
+		}
+		.wrap_img img  {
+			width: 100%;
+		}
+		.wrap_text {
+			text-align: center;
+			padding: 20px 0;
+
+		}
+
+
+	</style>
+</head>
+<body>
+
+	<div class="wrapper">
+
+		<div class="wrap_img">
+			<img src="{{ "http://192.168.0.188:7999/images" + photourl }}">
+		</div>
+		<div class="wrap_text">
+			Lorem Ipsum
+		</div>
+
+	</div>
+	<!--/.wrapper-->
+
+</body>
+</html>
