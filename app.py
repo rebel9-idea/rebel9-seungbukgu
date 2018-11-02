@@ -1,7 +1,6 @@
 from flask import Flask, request, send_from_directory, abort, Response, render_template, redirect
 import json
 import os
-from _data import thedata
 from flask_cors import CORS
 from dbmodels import thedb
 from bson import ObjectId
@@ -47,29 +46,26 @@ def getplacebyid(pathid):
         return abort(401, {'Error': 'Malformed request'})
     if code != 'rebel9266!':
         return abort(400, {'Error': 'Not valid code!'})
-    for place in thedb.Places.collection.find():
-        del place['_id']
+    for place in thedb.Places.collection.find({}, {'_id': False}):
         if pathid == place['code']:
             final = {}
             final['work'] = []
             chapters_arr = []
             workdict = {}
 
-            for chapter in thedb.Chapters.collection.find():
-                del chapter['_id']
+            for chapter in thedb.Chapters.collection.find({}, {'_id': False}):
                 if place['code'] in chapter['place_code']:
-                    workdict[chapter['work_code']] = [i for i in thedata.works if i['code'] == chapter['work_code']][0]
+                    workdict[chapter['work_code']] = [i for i in thedb.Works.collection.find({}, {'_id': False}) if i['code'] == chapter['work_code']][0]
                     workdict[chapter['work_code']]['chapters'] = []
                     workdict[chapter['work_code']]['chapters'].append(chapter)
                     workdict[chapter['work_code']]['author'] = \
-                    [b for b in thedata.authors if b['code'] == workdict[chapter['work_code']]['author_code']][0]
+                    [b for b in thedb.Authors.collection.find() if b['code'] == workdict[chapter['work_code']]['author_code']][0]
                     workdict[chapter['work_code']]['author']['rel_places'] = []
 
-                    relworks = [w for w in thedata.works if
+                    relworks = [w for w in thedb.Works.collection.find({}, {'_id': False}) if
                                 w['author_code'] == workdict[chapter['work_code']]['author_code']]
                     for relwork in relworks:
-                        # print(relwork['author_code'], relwork['code'], len(relwork))
-                        relwork['the_array'] = [pl for pl in thedata.chapters if pl['work_code'] == relwork['code']]
+                        relwork['the_array'] = [pl for pl in thedb.Chapters.collection.find({}, {'_id': False}) if pl['work_code'] == relwork['code']]
                         for pl1 in relwork['the_array']:
                             try:
                                 k = pl1['place_code'].split(', ')
@@ -85,7 +81,7 @@ def getplacebyid(pathid):
                                                                                                            'code': ib[
                                                                                                                'code']}
                                                                                                           for ib in
-                                                                                                          thedata.places
+                                                                                                          thedb.Places.collection.find({}, {'_id': False})
                                                                                                           if ib[
                                                                                                                  'code'] == i][
                                                                                                           0])
@@ -117,50 +113,39 @@ def initialize():
     res = []
     authors = []
     works = []
-    for place in thedb.Places.collection.find():
-        del place['_id']
+    for place in thedb.Places.collection.find({}, {'_id': False}):
         final = {}
         final['work'] = []
         workdict = {}
-        for chapter in thedata.chapters:
+        for chapter in thedb.Chapters.collection.find({}, {'_id': False}):
             if place['code'] in chapter['place_code']:
-                workdict[chapter['work_code']] = [i for i in thedata.works if i['code'] == chapter['work_code']][0]
+                workdict[chapter['work_code']] = [i for i in thedb.Works.collection.find({}, {'_id': False}) if i['code'] == chapter['work_code']][0]
                 workdict[chapter['work_code']]['chapters'] = []
                 workdict[chapter['work_code']]['chapters'].append(chapter)
-                workdict[chapter['work_code']]['author'] = [b for b in thedata.authors if b['code'] == workdict[chapter['work_code']]['author_code']][0]
+                workdict[chapter['work_code']]['author'] = [b for b in thedb.Authors.collection.find({}, {'_id': False}) if b['code'] == workdict[chapter['work_code']]['author_code']][0]
                 workdict[chapter['work_code']]['author']['rel_places'] = []
 
-                relworks = [w for w in thedata.works if w['author_code'] == workdict[chapter['work_code']]['author_code']]
+                relworks = [w for w in thedb.Works.collection.find({}, {'_id': False}) if w['author_code'] == workdict[chapter['work_code']]['author_code']]
                 for relwork in relworks:
-                    # print(relwork['author_code'], relwork['code'], len(relwork))
-                    relwork['the_array'] = [pl for pl in thedata.chapters if pl['work_code'] == relwork['code']]
+                    relwork['the_array'] = [pl for pl in thedb.Chapters.collection.find({}, {'_id': False}) if pl['work_code'] == relwork['code']]
                     for pl1 in relwork['the_array']:
                         try:
-                            k = pl1['place_code'].split(', ')
+                            k = pl1['place_code']
                             for i in k:
                                 try:
-                                    workdict[chapter['work_code']]['author']['rel_places'].append([
-                                        {'longitude': ib['longitude'], 'latitude': ib['latitude'], 'code': ib['code']} for ib in
-                                        thedata.places if ib['code'] == i][0])
-                                    workdict[chapter['work_code']]['author']['rel_places'] = [dict(t) for t in {tuple(d.items()) for d in
-                                                                                                                workdict[
-                                                                                                                    chapter[
-                                                                                                                        'work_code']][
-                                                                                                                    'author'][
-                                                                                                                    'rel_places']}]
+                                    workdict[chapter['work_code']]['author']['rel_places'].append([{'longitude': ib['longitude'], 'latitude': ib['latitude'], 'code': ib['code']} for ib in thedb.Places.collection.find({}, {'_id': False}) if ib['code'] == i][0])
+                                    workdict[chapter['work_code']]['author']['rel_places'] = [dict(t) for t in {tuple(d.items()) for d in workdict[chapter['work_code']]['author']['rel_places']}]
                                 except:
                                     pass
                         except Exception as e:
                             print(e)
         place['work'] = list(workdict.values())
         res.append(place)
-    for author in thedb.Authors.collection.find():
-        del author['_id']
+    for author in thedb.Authors.collection.find({}, {'_id': False}):
         authors.append(author)
-    for work in thedb.Works.collection.find():
-        del work['_id']
+    for work in thedb.Works.collection.find({}, {'_id': False}):
         works.append(work)
-
+    print(res)
     return resp(200, {"places": res, 'works': works, 'authors': authors})
 
 @app.route('/work/<path:workcode>', methods=['POST'])
