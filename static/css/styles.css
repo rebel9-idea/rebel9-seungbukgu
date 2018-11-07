@@ -233,12 +233,18 @@ ul, li {
 }
 .marker_places {
   filter:drop-shadow(0px 1px 1px  rgba(0,0,0,0.5));
+  border-radius: 0%;
 }
 .showing_relations .marker_places {
   opacity: 0.3;
 }
 .marker_places.show_relations {
   opacity: 1;
+  /*background-image:url(../img/icn/marker_place_active.svg) !important;*/
+  width: 60px !important;
+  height: 60px !important;
+  border-radius: 50%;
+  border:2px solid black;
 }
 .marker_floaters {
     width: auto;
