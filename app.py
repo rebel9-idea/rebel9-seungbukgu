@@ -268,7 +268,7 @@ def uploadimages():
     hashids = Hashids(salt=hashsalt)
     theid = hashids.encode(len(list(thedb.Photo.collection.find({}, {'_id': False}))))
     try:
-        with open('./images/' + filename + '.jpg', 'wb') as fh:
+        with open('/home/project9/sbculture/web/images/' + filename + '.jpg', 'wb') as fh:
             fh.write(base64.decodebytes(image_data))
         tosave = {
         "datetime" : datetime.datetime.now(),
