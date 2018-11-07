@@ -249,7 +249,6 @@ def uploadimages():
     try:
         req = request.form.to_dict(flat=False)
         print(type(req), req['code'])
-        print(type(req), req['file'])
         code = req['code']
     except Exception as e:
         print('Exception: ', e)
@@ -278,8 +277,8 @@ def uploadimages():
         }
         saveimg = thedb.Photo.collection.insert_one(tosave)
         return resp(200, {'Result': {'path': theid}})
-    except:
-        return abort(500, {'Result': 'Save Error'})
+    except Exception as e:
+        return abort(500, {'Result': 'Save Error', "Exception": e})
 
 
 
