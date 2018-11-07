@@ -3,7 +3,7 @@
 	//http://192.168.0.188:7999/place/%placeid% POST data={"code": "rebel9266!"}
 
 	// local test domain
-	var domain = "http://192.168.0.188:7999/"
+	//var domain = "http://192.168.0.188:7999/"
 	// actual domain
 	var domain = "https://sbculture.project9.co.kr/";
 
@@ -51,7 +51,7 @@
 		mapboxgl.accessToken = "pk.eyJ1IjoiZmFyaXNrYXNzaW0iLCJhIjoiSk1MaUthdyJ9.vkxtdDbYdLi524WwlKORBw";
 		map = new mapboxgl.Map({
 		    container: "map",
-		    style: "mapbox://styles/fariskassim/cjny6ikrk0tuz2sstd07h06d8",
+		    style: "mapbox://styles/rebel9act/cjmxg6xwa1w182roluzcnmsbc",
 		    center: [127.013387, 37.590479],
 		    maxBounds: [
 	    	// 	// strictly seongbukgu
@@ -70,7 +70,7 @@
 		    ],
 		    zoom: 14,
 		    // minZoom: 14,
-		    maxZoom: 15.6
+		    maxZoom: 16
 		    // pitch: 60, // pitch in degrees
 		    // bearing: -60, // bearing in degrees
 		});
@@ -509,10 +509,6 @@
 			}
 		};
 
-
-		
-
-
 		// // check for related people and add to floaters_markers.features
 		if (data_current_authors.length > 0) {
 			
@@ -526,7 +522,8 @@
 							                "code": data_current_authors[i].code,
 							                "index": i,
 							                "related_places": data_current_authors[i].rel_places,
-							                "name": data_current_authors[i].name
+							                "name": data_current_authors[i].name,
+							                "thumb": domain+'img/icn/marker_author_active_default.png',
 							            },
 							            "geometry": {
 							                "type": "Point",
@@ -537,8 +534,14 @@
 							            }
 							        }
 
+ 				// if author has images, change thumbnail image to his image instead of using default
+   	 			if (data_current_authors[i].images.length > 0) {
+   	 				person_to_add.properties.thumb = domain+data_current_authors[i].images[0].image_thumb
+   	 			} 
+
 		        // add related persons to all-floaters array
 				floaters_markers.features.push(person_to_add);
+
 			}
 		}
 
@@ -549,7 +552,7 @@
 			for (var i = 0; i < floaters_markers.features.length; i++) {
 
 				// radius of related items
-				var floaters_rad = 0.002;
+				var floaters_rad = 0.0023;
 				
 				floaters_markers.features[i].geometry.coordinates = [
 	                all_data.places[data_index].longitude + (floaters_rad + floaters_rad *  Math.sin((360 / floaters_markers.features.length / 180) * (i + 0) * Math.PI)) - floaters_rad,
@@ -557,18 +560,26 @@
 				]
 
 			    // create marker and add to map
-				    var el = document.createElement("div");
-				    var newContent = document.createTextNode(floaters_markers.features[i].properties.name); 
-				    el.appendChild(newContent);  
-				    el.className = "marker_floaters";
+				    var el = document.createElement("div");  
+				    el.className = "marker_floaters floater_"+floaters_markers.features[i].properties.markertype;
 				    el.dataset.index = i;
 				    el.dataset.code = floaters_markers.features[i].properties.code;
 				    el.dataset.type = floaters_markers.features[i].properties.markertype;
-				    // el.style.backgroundImage = "url(img/icn/icn_marker_"+floaters_markers.features[i].properties.markertype+".svg)";
-				    // el.style.backgroundColor = "#D8D8D8";
-				    // el.style.fontSize = "18px";
-				    // el.style.width = "35px";
-				    // el.style.height = "35px";
+
+				    // append thumbnail image to author floater
+				    if (floaters_markers.features[i].properties.markertype == "author") {
+				    	var author_thumb = document.createElement('div');
+				    	author_thumb.className = "author_thumb";
+				    	var author_thumb_img = document.createElement("img");
+				    	author_thumb_img.src = floaters_markers.features[i].properties.thumb;
+				    	author_thumb.appendChild(author_thumb_img);
+				    	el.appendChild(author_thumb)
+				    }
+
+				    // append author name to author floater
+				    var name_span = document.createElement('span')
+				    name_span.innerHTML = floaters_markers.features[i].properties.name;
+				    el.appendChild(name_span);
 
 				    // add marker to map
 				    new mapboxgl.Marker(el)
@@ -576,7 +587,6 @@
 				        .addTo(map);
 
 				   //console.log("R2 HERE", floaters_markers.features[i].geometry.coordinates)    
-
 
 			}
 		};
@@ -602,12 +612,15 @@
 		    	// from coordinates of clicked place marker -> coordinates of related marker
 		    	link_lines_features_to_add = {
 											    "type": "Feature",
+							                    "properties": {
+							                        "dasharray": [3,3],
+							                        "width": 1,
+							                    },
 											    "geometry": {
 											        "type": "LineString",
 											        "coordinates": [
 											            [ all_data.places[data_index].longitude , all_data.places[data_index].latitude ],
 											            floaters_markers.features[i].geometry.coordinates
-
 											        ]
 											    }
 											 };
@@ -624,9 +637,23 @@
 		    	var related_shortcode = floaters_markers.features[i].properties.related_places
 
 		    	// 2nd loop to draw lines for each related place -> author
-		    	for (var y = 0; y < related_shortcode.length; y++) {
+
+		    	// stop gap measure to limit author's place relation
+		    	if (related_shortcode.length < 5) {
+		    		var author_place_links = related_shortcode.length	
+		    	} else {
+		    		var author_place_links = 5;
+		    	}
+		    	
+
+		    	// for (var y = 0; y < related_shortcode.length; y++) {
+		    	for (var y = 0; y < author_place_links; y++) {
 			    	link_lines_features_to_add = {
 												    "type": "Feature",
+								                    "properties": {
+								                        "dasharray": [0.1,0.1],
+								                        "width": 0.5,
+								                    },
 												    "geometry": {
 												        "type": "LineString",
 												        "coordinates": [
@@ -658,8 +685,8 @@
 		    "source": "link-lines-source",
 		    "paint": {
 		        "line-color": "#000",
-		        "line-width": 1.5,
-		        "line-dasharray": [2, 2]
+		        "line-width": ['get', 'width'],
+		        "line-dasharray": [3,3]
 		    }
 		});	    	
 
@@ -714,9 +741,13 @@
 	var lowest_index;
 	var lowest_value;
 	var closest_place_text;
+	var closest_place_name;
 
     // start camera feed
     function start_camera() {
+
+    	$('.location_text').empty();
+    	$('.location_name').empty();
 
     	// BLOCK : look for shortest distance between user and all places
     	closest_location_arr = [];
@@ -733,6 +764,7 @@
 		  }
 		};
 		var closest_place_code = all_data.places[lowest_index].code;
+		closest_place_name = '<'+all_data.places[lowest_index].name+'> 중';
 		// the following doesnt have a quote, use a fallback instaed; P9, 13, P15, 16,17,  P25
 		if ( closest_place_code == 'P00009' || closest_place_code == 'P00013' || closest_place_code == 'P00015' || closest_place_code == 'P00016' || closest_place_code == 'P00017' || closest_place_code == 'P00018' || closest_place_code == 'P00025' ) {
 			closest_place_code = 'P00001';
@@ -754,6 +786,7 @@
 	    	console.log(json)
 	    	closest_place_text = json.Result;
 	    	$('.location_text').html(closest_place_text);
+	    	$('.location_name').html(closest_place_name);
 				
 	    	// add linebreak '\n' for every nth space in string
 			var n = 9;
@@ -1052,26 +1085,70 @@
 
 	        var svgtext = new fabric.Text(closest_place_text, { 
 		        fontFamily: "Noto Serif",
-		        fontWeight: "bold",
+		        fontWeight: "400",
 		        left: 0, 
 		        top: 200,
 		        fill: "black",
 		        textAlign : "right",
-		        fill:'#4A6CE2',
+		        fill:'#2C4997',
 		        id:"",
-		        fontSize: 10
+		        fontSize: 10.5
 	        });
 
-	        svgtext.left = canvas_width - svgtext.width - 14;
-	        svgtext.top = canvas_height - svgtext.height - 5;
+	        var svgtext2 = new fabric.Text(closest_place_name, { 
+		        fontFamily: "Noto Serif",
+		        // fontWeight: "bold",
+		        left: 0, 
+		        top: 200,
+		        fill: "black",
+		        textAlign : "right",
+		        fill:'#2C4997',
+		        id:"",
+		        fontSize: 10.5
+	        });
+
+	        svgtext.left = canvas_width - svgtext.width - 10;
+	        svgtext.top = canvas_height - svgtext.height - 40;
+
+	        svgtext2.left = canvas_width - svgtext2.width - 10;
+	        svgtext2.top = canvas_height - svgtext2.height - 10;
 
 	        d_canvas.add(svgtext);
 	        d_canvas.bringToFront(svgtext);
+
+	        d_canvas.add(svgtext2);
+	        d_canvas.bringToFront(svgtext2);
+
+
+	        fabric.loadSVGFromURL('img/title.svg' ,function(objects,options){
+	            var svgObj = fabric.util.groupSVGElements(objects, options);
+
+	            svgObj.scaleX = 1;
+	            svgObj.scaleY = 1;
+
+	            var svgObjWidth = svgObj.width * svgObj.scaleX;
+	            var svgObjHeight = svgObj.height * svgObj.scaleY;
+
+	            svgObj.scale(0.7).set({
+	                left: 12,
+	                top:  9,
+	                width: 185,
+	                height: 19,
+	                id:'svg_title',
+	                objType:'object'//,
+	                //hasControls: false,
+	                //hasBorders: false
+	            });
+
+	            d_canvas.add(svgObj);
+	            d_canvas.bringToFront(svgObj);
+	            //d_canvas.setActiveObject(svgObj);
+
+	        });
         });
 
     };
     // END FN add_fabric_img();
-
 
 
     // FN send base64
@@ -1147,6 +1224,10 @@
     //FN populate detail panel
     function populate_details(data_type, data_id, data_code) {
 
+    	$('#meta_wrap').attr('class', 'type_'+data_type);
+    	// prevent double click on markers
+    	$('#map').addClass('disabled');
+
 		//update url of detail page with data_type + data_id
 		updateURL("?"+data_type+"="+data_code);	
 
@@ -1178,12 +1259,12 @@
 
 			$(".ui_detail").fadeIn();
 			$(".ui_detail").scrollTop(0);
-			$('.meta_wrap').fadeIn();
+			$('#meta_wrap').fadeIn();
 			show_sticky_title();
 
 			// check for images	and populate
 			if ( data_detail.images.length > 0) {
-				$(".meta_image").show()
+				$(".meta_image").hide()
 				$(".slider_wrap").empty();
 				// for (var i = 0; i < data_detail.img_path.length; i++) {
 				for (var i = 0; i < data_detail.images.length; i++) {
@@ -1192,19 +1273,30 @@
 							<img src="'+domain.substring(0, domain.length - 1)+data_detail.images[i].image_orig+'">\
 						</li>');
 				}
+				
+				// init slick with slight delay because of adaptive height issue for 1st image
+				setTimeout(function(){ 
+					$(".meta_image").show()
 
-				$(".slider_wrap").slick({
-					dots: true,
-					arrows:false,
-					infinite: true,
-				});
+					$(".slider_wrap").slick({
+						dots: true,
+						arrows:false,
+						infinite: true,
+						mobileFirst:true,
+						adaptiveHeight: true
+					});
+		
+					// slider caption
+					if  (data_detail.images[0].image_caption.length > 0) {
+						$('<span class="slider_caption">'+data_detail.images[0].image_caption+'</span>').insertBefore('.slick-dots');
+					} else {
+						$('.slider_caption').remove();
+					}
 
-				// slider caption
-				if  (data_detail.images[0].image_caption.length > 0) {
-					$('<span class="slider_caption">'+data_detail.images[0].image_caption+'</span>').insertBefore('.slick-dots');
-				} else {
-					$('.slider_caption').remove();
-				}
+				}, 700);
+
+
+
 
 			} else {
 				$(".meta_image").hide()
@@ -1216,46 +1308,77 @@
 
 			// subtitle 
 			if (data_type == 'place') {
-				$(".meta_subtitle").html(data_detail.address);
+				$(".meta_subtitle1").hide()
+				$(".meta_subtitle2").show()
+				$(".meta_subtitle2").html(data_detail.address);
 			} 
 			else if (data_type == 'work') {
-				$(".meta_subtitle").html('<span data-type="author" data-code="'+data_detail.author.code+'">'+ data_detail.author.name +'</span>, '+data_detail.author.hanmun);
+				$(".meta_subtitle1").hide()
+				$(".meta_subtitle2").show()
+
+				var dob = data_detail.author.dob.toString().replace(/(\d{4})(\d{2})(\d{2})/, "$1.$2.$3");
+				var dod = data_detail.author.dod.toString().replace(/(\d{4})(\d{2})(\d{2})/, "$1.$2.$3");
+
+				$(".meta_subtitle2").html('<span data-type="author" data-code="'+data_detail.author.code+'">'+ data_detail.author.name +'</span><br>'+dob +' - '+dod);
 			}
 			else if (data_type == 'author') {
+				$(".meta_subtitle1").hide()
+				$(".meta_subtitle2").show()
+				
+
 				var dob = data_detail.dob.toString().replace(/(\d{4})(\d{2})(\d{2})/, "$1.$2.$3");
 				var dod = data_detail.dod.toString().replace(/(\d{4})(\d{2})(\d{2})/, "$1.$2.$3");
 
 
-				$(".meta_subtitle").html(dob +' - '+dod);
+				$(".meta_subtitle2").html(dob +' - '+dod);
 			};
 
 
 			// description
 			$(".meta_desc").empty();
-			$(".meta_desc").append('\
-				<div class="chapter_header">\
-					<div class="chapter_read read_off"><div class="tts_read">READ</div><div class="tts_stopread">STOP</div></div>\
-				</div>\
-				<span>'+data_detail.desc+'</span>\
-				<div class="expand_desc">더 보기 &#9662;</div>\
-			')
-			tts_text = data_detail.desc;
 
-			// set up accordion description text
-		    hiddenHeight; 
-		    // console.log('height', $('.meta_desc span').get(0).scrollHeight)
-		    if ($('.meta_desc span').get(0).scrollHeight <= 310) {
-		      $('.expand_desc').hide();
-		      $('.meta_desc span').height($('.meta_desc span').get(0).scrollHeight);
-		      console.log('case1')
-		    } else {
-			  console.log('case2')		    	
-		      $('.expand_desc').show();
-		      $('.meta_desc span').removeClass('open');
-		      hiddenHeight = 200;
-		      $('.meta_desc span').height(hiddenHeight);
-		      $('.expand_desc').text('더 보기 v');
-		    }
+			if (data_type == 'work') {
+
+				$(".meta_desc").append('\
+					<span>'+data_detail.desc+'</span>\
+					<div class="chapter_header">\
+						<div class="chapter_read read_off">\
+							<div class="tts_read"><img src="img/icn/icn_tts_turnon.svg"> 부분듣기</div>\
+							<div class="tts_divider">|</div>\
+							<div class="tts_read_all">전체듣기</div>\
+							<div class="tts_stopread"><img src="img/icn/icn_tts_turnoff.svg">  듣기종료</div>\
+						</div>\
+					</div>\
+					<div class="expand_desc"><img class="expand_arrow" src="img/icn/icn_arrow_down.svg"> 작품설명 더보기</div>\
+				')
+				tts_text = data_detail.desc;
+
+				// set up accordion description text
+			    hiddenHeight; 
+			    // console.log('height', $('.meta_desc span').get(0).scrollHeight)
+			    if ($('.meta_desc span').get(0).scrollHeight <= 310) {
+			      $('.meta_desc').removeClass('expandable');
+			      $('.expand_desc').hide();
+			      $('.meta_desc span').height($('.meta_desc span').get(0).scrollHeight);
+			      console.log('case1')
+			    } else {
+				  console.log('case2')		    	
+			      $('.expand_desc').show();
+			      $('.meta_desc span, .meta_desc').removeClass('open');
+			      hiddenHeight = 200;
+			      $('.meta_desc').addClass('expandable');
+			      $('.meta_desc span').height(hiddenHeight);
+			      $('.expand_desc').html('<img class="expand_arrow" src="img/icn/icn_arrow_down.svg"> 작품설명 더보기');
+			    }
+
+			} else {
+
+				$(".meta_desc").append('\
+					<div class="ribbon"><img src="img/ribbon.svg"></div>\
+					<div class="chapter_read read_off"><div class="tts_read"><img src="img/icn/icn_tts_turnon.svg"> 전체듣기</div><div class="tts_stopread"><img src="img/icn/icn_tts_turnoff.svg">  듣기종료</div></div>\
+					<span>'+data_detail.desc+'</span>\
+				')
+			}
 
 
 
@@ -1279,15 +1402,28 @@
 
 					for (var i = data_detail.chapters.length - 1; i >= 0; i--) {
 						$(".meta_chapters").prepend('\
+							<div class="ribbon"><img src="img/ribbon.svg"></div>\
 							<div class="single_chapter">\
-								<div class="chapter_header">\
-									<div class="chapter_title">Chapter '+data_detail.chapters[i].num+'</div>\
-									<div class="chapter_read read_off"><div class="tts_read">READ</div><div class="tts_stopread">STOP</div></div>\
-								</div>\
 								<span>'+data_detail.chapters[i].desc+'</span>\
+								<div class="chapters_rel">'+data_detail.chapters[i].rel_docs+'</div>\
+								<div class="chapter_header">\
+									<div class="chapter_read read_off">\
+										<div class="tts_read"><img src="img/icn/icn_tts_turnon.svg"> 부분듣기</div>\
+										<div class="tts_divider">|</div>\
+										<div class="tts_read_all">전체듣기</div>\
+										<div class="tts_stopread"><img src="img/icn/icn_tts_turnoff.svg">  듣기종료</div>\
+									</div>\
+								</div>\
 							</div>\
 							')
 					}
+
+					$(".meta_chapters").prepend('\
+						<div class="chapters_title">'+data_detail.author.name+'가 남긴 성북구 이야기</div>'
+						);
+					$(".meta_chapters").append('\
+							<div class="ribbon"><img src="img/ribbon.svg"></div>'
+						);
 
 				} else {
 					$(".meta_chapters").hide();
@@ -1356,6 +1492,18 @@
 				$('.meta_related ul').empty();
 			}
 
+			// define what to read for tts_text_all
+			if (data_type == 'place' || data_type == 'author') {
+				tts_text_all = $('.meta_desc').text();	
+			} else {
+				tts_text_all = $('.meta_desc').text();
+				
+				$('.single_chapter span').each(function(){
+				  tts_text_all += $(this).text();
+				})		
+			}
+			
+
 	    })
 	    .fail(function(jqXHR, textStatus, errorThrown) {
 	        console.log("HTTP Request Failed",jqXHR);
@@ -1371,17 +1519,17 @@
 
       if ( $('.meta_desc span').hasClass('open') ) {	
         
-        $('.expand_desc').text('더 보기 v');
+        $('.expand_desc').html('<img class="expand_arrow" src="img/icn/icn_arrow_down.svg"> 작품설명 더보기');
 
         $('.meta_desc span').animate({
             height: hiddenHeight
         }, 300, function(){
         });  
         console.log('case4')	
-        $('.meta_desc span').removeClass('open');
+        $('.meta_desc span, .meta_desc').removeClass('open');
       } else {
 	    
-        $('.expand_desc').text('Show Less ^');
+        $('.expand_desc').html('<img class="expand_arrow" src="img/icn/icn_arrow_up.svg"> 작품설명 닫기');
 
         $('.meta_desc span').animate({
             height: $('.meta_desc span').get(0).scrollHeight
@@ -1389,7 +1537,7 @@
             $('.meta_desc span').height('auto');
         });
         console.log('case3')	
-        $('.meta_desc span').addClass('open');
+        $('.meta_desc span, .meta_desc').addClass('open');
       }
 
       
@@ -1412,6 +1560,7 @@
 	// refresh location while viewing map
 	$(".btn_update_loc").click( function() {
 		getUserLocation();
+		clear_map();
 	})
 
 	// click on PLACE markers
@@ -1528,6 +1677,8 @@
     	var data_type = $(this).attr("data-type");
     	var data_code = $(this).attr("data-code");
     	populate_details(data_type, data_index, data_code );
+
+    	$('.ui_list .list_content').addClass('disabled');
     });
 
 	// close list panel
@@ -1542,6 +1693,7 @@
 		wipeclean_url();
 
 		$('.meta_desc span').height('auto');
+		$('#map, .ui_list .list_content').removeClass('disabled');
 
 		if ( !$(".detail_bottom_ui").hasClass("hide_share") ) {
 			toggle_detail_share();	
@@ -1560,10 +1712,10 @@
 		close_detail()
 	});
 
-	$(document).on("click",".meta_allworks li, .meta_related li, .meta_subtitle span",function(){
+	$(document).on("click",".meta_allworks li, .meta_related li, .meta_subtitle1 span",function(){
 		var data_code = $(this).attr('data-code');
 		var data_type = $(this).attr('data-type');
-		$('.meta_wrap').fadeOut("fast", function() {
+		$('#meta_wrap').fadeOut("fast", function() {
 			populate_details(data_type, null, data_code);	
 		})
 		
@@ -1581,20 +1733,26 @@
 	
 	/*** TEXT-TO-SPEECH data_detail.work ***/
 
-	var tts_text = "모든 국민은 종교의 자유를 가진다. 모든 국민은 주거의 자유를 침해받지 아니한다. 국무회의의 구성원으로서 국정을 심의한다, 모든 국민은 자기의 행위가 아닌 친족의 행위로 인하여 불이익한 처우를 받지 아니한다.군사에 관한 것도 또한 같다. 이를 규제·조정할 수 있다. 모든 국민은 신체의 자유를 가진다, 1차에 한하여 중임할 수 있다.이 헌법공포 당시의 국회의원의 임기는 제1항에 의한 국회의 최초의 집회일 전일까지로 한다. 모든 국민은 법률이 정하는 바에 의하여 선거권을 가진다. 국무총리 또는 국무위원이 출석요구를 받은 때에는 국무위원 또는 정부위원으로 하여금 출석·답변하게 할 수 있다. 외국에 대하여 국가를 대표한다.";
+	var tts_text;
+	var tts_text_all;
 	var tts_voice = "Korean Male";
 
 
 
 	// FN show / hide share to fb kakao
-	function toggle_tts() {
+	function toggle_tts(all) {
 		// turn on tts
 		if ($(".detail_tts").hasClass("tts_nowoff") ) {
 			$(".detail_tts").removeClass("tts_nowoff")
 			$(".tts_turnon").hide();
 			$(".tts_turnoff").show();
 			$('.detail_tts').css('display', 'flex');
-			responsiveVoice.speak(tts_text, tts_voice, {pitch: 1.0, rate:0.9})
+			if (all) {
+				responsiveVoice.speak(tts_text_all, tts_voice, {pitch: 1.0, rate:0.9, onend: off_tts})	
+			} else {
+				responsiveVoice.speak(tts_text, tts_voice, {pitch: 1.0, rate:0.9, onend: off_tts})
+			}
+			
 		} 
 		// turn off tts
 		else {
@@ -1604,23 +1762,28 @@
 	// END
 
 	// CLICKING ON READ CHAPER
-	function read_chapter(that) {
+	function read_chapter(that, all) {
 		$('.chapter_read').addClass('read_off');
 		responsiveVoice.cancel();
 		$(".detail_tts").removeClass("tts_nowoff");
 		$(".tts_turnon").hide();
 		$(".tts_turnoff").show();
 		$('.detail_tts').css('display', 'flex');
-		responsiveVoice.speak(tts_text, tts_voice, {pitch: 1.0, rate:0.9})
+		if (all) {
+			responsiveVoice.speak(tts_text_all, tts_voice, {pitch: 1.0, rate:0.9, onend: off_tts})	
+		} else {
+			responsiveVoice.speak(tts_text, tts_voice, {pitch: 1.0, rate:0.9, onend: off_tts})
+		}
 
 		if (that != undefined) {
-			$('.chapter_read').addClass('read_off');
-			$(that).removeClass('read_off');
+			// $('.chapter_read').addClass('read_off');
+			$('.chapter_read').removeClass('read_off');
 		}	
 	}
 
 	// FN turn off tts
 	function off_tts() {
+		console.log('off_tts called')
 		$(".detail_tts").addClass("tts_nowoff")
 		$(".tts_turnon").show();
 		$(".tts_turnoff").hide();
@@ -1634,24 +1797,37 @@
 		toggle_tts();
 	});
 
-	$(document).on("click",".chapter_read",function(){
+	$(document).on("click",".tts_read",function(){
 
 		// different text for meta_desc and chapters
-		if ( $(this).parent('.chapter_header').parent('.meta_desc').length > 0 ) {
+		if ( $(this).parent('.chapter_read').parent('.meta_desc').length > 0 ) {
 			tts_text = $(this).closest('.meta_desc').find('span').html();	
+			console.log('ttsxx', tts_text)
 		} 
-		else if ( $(this).parent('.chapter_header').parent('.single_chapter').length > 0 ) {
+		else if ( $(this).parent('.chapter_read').parent('.chapter_header').parent('.single_chapter').length > 0 ) {
 			tts_text = $(this).closest('.single_chapter').find('span').html();
 		}
 		
 		//	console.log(tts_text)
-		var that = this
-		if ( $(this).hasClass('read_off') ) {
+		var that = $(this).parent('.chapter_read')
+		if ( that.hasClass('read_off') ) {
+			console.log('case1 x')
 			read_chapter(that);	
-		} else {
-			off_tts();
 		}
-		
+	});
+
+	$(document).on("click",".tts_read_all",function(){
+
+		//	console.log(tts_text)
+		var that = $(this).parent('.chapter_read')
+		if ( that.hasClass('read_off') ) {
+			console.log('case1 x')
+			read_chapter(that, true);	
+		} 
+	});
+
+	$(document).on("click",".tts_stopread",function(){
+		off_tts();
 	});
 
 	$( ".ui_detail" ).scroll(function() {

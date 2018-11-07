@@ -43,14 +43,17 @@
 	<div class="map_status">LOREM IPSUM</div>
 
 	<div class="ui_map">
+
+		<div class="map_title"><img src="img/title.svg"></div>
+
 		<div class="ui_map_bottom">
 			<div class="btn_base ui_map_btn btn_opencam">
 				<img src="img/icn/icn_camera.svg">
-				<label>추억 남기기</label>
+				<label><img src="img/text_camera.svg"></label>
 			</div>
 			<div class="btn_base ui_map_btn btn_listview">
 				<img src="img/icn/icn_list.svg">
-				<label>이야기 목록 보기</label>
+				<label><img src="img/text_list.svg"></label>
 			</div>
 			<div class="btn_base ui_map_btn btn_update_loc">
 				<img src="img/icn/icn_updatelocation.svg">
@@ -66,7 +69,7 @@
 			<span>LOADING...</span>
 		</div>
 		<div class="intro_where">
-			<span>당신은 지금<br>어디에 있습니까??</span>
+			<span>당신은 지금<br>어디에 있습니까?</span>
 			<div class="location_check">내 위치 확인</div>
 		</div>
 		<div class="intro_check">
@@ -103,7 +106,7 @@
 
 		<div class="detail_menu">
 			<li class="detail_menu_list"><img src="img/icn/icn_list_blue.svg"></li>
-			<li class="detail_menu_title">물 따라 이야기 따라</li>
+			<li class="detail_menu_title"><img src="img/title.svg"></li>
 			<li class="close_detail"><img src="img/icn/icn_close.svg"></li>
 		</div>
 
@@ -134,14 +137,17 @@
 			</div>
 		</div>
 
-		<div class="meta_wrap">
+		<div id="meta_wrap">
 			<div class="meta_title meta_single">
 				타이틀
 			</div>
 			<div class="meta_title_sticky meta_single">
 				타이틀
 			</div>
-			<div class="meta_subtitle meta_single">
+			<div class="meta_subtitle1 meta_subtitle meta_single">
+				
+			</div>
+			<div class="meta_subtitle2 meta_subtitle meta_single">
 				서울특별시 마포구 서교동 215-1
 			</div>
 
@@ -154,14 +160,15 @@
 				<span>
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ultricies vel elit eu lobortis. Etiam at dui ac libero tincidunt pharetra sit amet ut metus. In tristique quam id nulla ornare faucibus. Duis purus dui, porttitor ac vulputate id, tincidunt nec magna. Vivamus vitae rutrum dui. Duis semper dictum nulla eget semper. Pellentesque augue leo, pulvinar nec sapien lacinia, blandit tempus ante. Sed orci ligula, hendrerit sit amet nibh nec, rutrum dignissim velit. Aenean laoreet molestie augue quis tincidunt.
 				</span>
-				<div class="expand_desc">더 보기 &#9662;</div>
+				<div class="expand_desc"><img class="expand_arrow" src="img/icn/icn_arrow_down.svg"> 작품설명 더보기</div>
 				<div class="gradient_desc"></div>
+			</div>
+			<div class="meta_chapters meta_single">
+				<div class="ribbon"><img src="img/ribbon.svg"></div>
 			</div>
 			<div class="meta_rel_doc meta_single">
 				<span>
 				</span>
-			</div>
-			<div class="meta_chapters meta_single">
 			</div>
 			<div class="meta_allworks meta_single">
 				<ul></ul>
@@ -171,7 +178,7 @@
 			</div>
 
 		</div>
-		<!--/.meta_wrap-->
+		<!--/#meta_wrap-->
 
 
 	</div>
@@ -197,7 +204,9 @@
 
 			<div class="ratio_guide">
 				<img src="img/ratio_overlay.png">
+				<img class="cam_title" src="img/title.svg">
 				<div class="location_text">이 산줄기를 타고, 허연 신작로가 널따랗게 커브를 그리며 돌아간 산지 일대의 구멍들 속에 그들은 살고 있었다.</div>
+				<div class="location_name"><닮은 방들> 중</div>
 				<div class="cam_blackbar"></div>
 			</div>
 				
@@ -217,7 +226,7 @@
 				<div class="modal_bg"></div>
 				<div class="wrap_modal">
 					<div class="btn_close close_share"><img src="img/icn/icn_close.svg"></div>
-					<span>Copy this URL</span>
+					<span>아래의 주소를 복사하여 공유하세요</span>
 					<pre></pre>
 					<div class="copy_url">복사</div>
 				</div>

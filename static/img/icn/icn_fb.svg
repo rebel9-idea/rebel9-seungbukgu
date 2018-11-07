@@ -1,1 +1,11 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="11" height="22"><path fill="#4A6CE2" fill-rule="evenodd" d="M6.752 7.91h3.799v3.725H6.687v10.294H2.724V11.663H0V7.917h2.72c0-1.099-.007-2.108 0-3.118C2.738 2.104 4.315.308 7.002.055c1.18-.111 2.378-.019 3.57-.019v3.523c-.785 0-1.507-.01-2.23.002-1.313.02-1.677.385-1.68 1.679-.004.809.004 1.617.01 2.426 0 .047.03.095.08.244"/></svg>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="11px" height="22px" viewBox="0 0 11 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.3 (67297) - http://www.bohemiancoding.com/sketch -->
+    <title>icn_fb</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="icn_fb" fill="#2C4997">
+            <path d="M6.752,7.91 L10.551,7.91 L10.551,11.635 L6.687,11.635 L6.687,21.929 L2.724,21.929 L2.724,11.663 L0,11.663 L0,7.917 L2.72,7.917 C2.72,6.818 2.713,5.809 2.72,4.799 C2.738,2.104 4.315,0.308 7.002,0.055 C8.182,-0.056 9.38,0.036 10.572,0.036 L10.572,3.559 C9.787,3.559 9.065,3.549 8.342,3.561 C7.029,3.581 6.665,3.946 6.662,5.24 C6.658,6.049 6.666,6.857 6.672,7.666 C6.672,7.713 6.702,7.761 6.752,7.91" id="Path"></path>
+        </g>
+    </g>
+</svg>
