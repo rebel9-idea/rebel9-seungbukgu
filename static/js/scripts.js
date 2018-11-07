@@ -1434,6 +1434,7 @@
 
 			if (all_data.places[current_place_index].work.length == 0) {
 				// console.log('case2');
+				clear_map();
 				map.easeTo(
 				{
 					center 	: [map_markers.features[current_place_index].geometry.coordinates[0], map_markers.features[current_place_index].geometry.coordinates[1]],
