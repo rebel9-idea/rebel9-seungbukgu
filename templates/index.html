@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>성북구</title>
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+
+	<meta property="og:url" content="http://http://www.seongbuk.go.kr/" />
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="성북구" />
+	<meta property="og:description" content="성북구 description." />
+	<meta property="og:image" content="img/ograph/ograph.jpg" />
+
+    <link rel="stylesheet" href="https://api.tiles.mapbox.com/mapbox-gl-js/v0.49.0/mapbox-gl.css" />
+	<link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.3.0/mapbox-gl-geocoder.css"  />
+	<link rel="stylesheet" href="css/slick.css" />
+	<link rel="stylesheet" href="css/styles.css" />
+
+</head>
+<body>
+
+	<script>
+	  window.fbAsyncInit = function() {
+	    FB.init({
+	      appId      : '189065528650428',
+	      xfbml      : true,
+	      version    : 'v3.2'
+	    });
+	    FB.AppEvents.logPageView();
+	  };
+
+	  (function(d, s, id){
+	     var js, fjs = d.getElementsByTagName(s)[0];
+	     if (d.getElementById(id)) {return;}
+	     js = d.createElement(s); js.id = id;
+	     js.src = "https://connect.facebook.net/en_US/sdk.js";
+	     fjs.parentNode.insertBefore(js, fjs);
+	   }(document, 'script', 'facebook-jssdk'));
+	</script>
+
+
+	<div id="map"></div>
+	<div class="map_status">LOREM IPSUM</div>
+
+	<div class="ui_map">
+		<div class="ui_map_bottom">
+			<div class="btn_base ui_map_btn btn_opencam">
+				<img src="img/icn/icn_camera.svg">
+				<label>추억 남기기</label>
+			</div>
+			<div class="btn_base ui_map_btn btn_listview">
+				<img src="img/icn/icn_list.svg">
+				<label>이야기 목록 보기</label>
+			</div>
+			<div class="btn_base ui_map_btn btn_update_loc">
+				<img src="img/icn/icn_updatelocation.svg">
+			</div>
+		</div>
+	</div>
+	<!--/.ui_map-->
+
+
+
+	<div class="ui_intro">
+		<div class="intro_loading">
+			<span>LOADING...</span>
+		</div>
+		<div class="intro_where">
+			<span>당신은 지금<br>어디에 있습니까??</span>
+			<div class="location_check">내 위치 확인</div>
+		</div>
+		<div class="intro_check">
+			<span>CHECKING YOUR LOCATION...</span>
+		</div>
+		<div class="intro_success">
+			<span>YOUR LOCATION IS FOUND.</span>
+			<div class="btn_start">시작</div>
+		</div>
+		<div class="intro_fail">
+			<span>YOUR LOCATION IS UNAVAILABLE</span>
+			<div class="btn_start">시작</div>
+		</div>
+	</div> 
+	<!--/.ui_intro-->
+
+	<div class="ui_list">
+		<img class="bg_list" src="img/bg_detail.png">
+
+		<ul class="list_content"></ul>
+
+		<div class="btn_close close_list"><img src="img/icn/icn_close.svg"></div>
+
+		<div class="list_buttons">
+			<li data-type="place" class="list_places active">장소별 보기</li>
+			<li data-type="author" class="list_authors">작가별 보기</li>
+			<li data-type="work" class="list_works">작품별 보기</li>
+		</div>
+	</div>
+	<!--/.ui_list-->
+
+
+	<div class="ui_detail">
+
+		<div class="detail_menu">
+			<li class="detail_menu_list"><img src="img/icn/icn_list_blue.svg"></li>
+			<li class="detail_menu_title">물 따라 이야기 따라</li>
+			<li class="close_detail"><img src="img/icn/icn_close.svg"></li>
+		</div>
+
+		<!-- 		
+		<div class="detail_header_wrap">
+			<div class="detail_header">
+				상세 타이틀
+			</div>
+			<div class="toggle_tts">
+				TTS
+			</div>
+		</div> 
+		-->
+
+		<div class="detail_bottom_ui hide_share">
+			<div class="dbu_box detail_share">
+				<span class="share_share"><img src="img/icn/icn_share.svg"></span>
+				<span class="share_close"><img src="img/icn/icn_close.svg"></span>
+			</div>
+			<div class="dbu_box detail_tts tts_nowoff">
+				<span class="tts_turnon"><img src="img/icn/icn_tts_turnon.svg"></span>
+				<span class="tts_turnoff"><img src="img/icn/icn_tts_turnoff.svg"></span>
+			</div>
+
+			<div class="share_services">
+				<div class="dbu_box single_share share_fb"><img src="img/icn/icn_fb.svg"></div>
+				<div class="dbu_box single_share share_kakao" id="share_kakao"><img src="img/icn/icn_kt.svg"></div>
+			</div>
+		</div>
+
+		<div class="meta_wrap">
+			<div class="meta_title meta_single">
+				타이틀
+			</div>
+			<div class="meta_title_sticky meta_single">
+				타이틀
+			</div>
+			<div class="meta_subtitle meta_single">
+				서울특별시 마포구 서교동 215-1
+			</div>
+
+			<div class="meta_image meta_single">
+				<ul class="slider_wrap">
+					<li><img src="img/test_img.jpg"></li>
+				</ul>
+			</div>
+			<div class="meta_desc meta_single">
+				<span>
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ultricies vel elit eu lobortis. Etiam at dui ac libero tincidunt pharetra sit amet ut metus. In tristique quam id nulla ornare faucibus. Duis purus dui, porttitor ac vulputate id, tincidunt nec magna. Vivamus vitae rutrum dui. Duis semper dictum nulla eget semper. Pellentesque augue leo, pulvinar nec sapien lacinia, blandit tempus ante. Sed orci ligula, hendrerit sit amet nibh nec, rutrum dignissim velit. Aenean laoreet molestie augue quis tincidunt.
+				</span>
+				<div class="expand_desc">더 보기 &#9662;</div>
+				<div class="gradient_desc"></div>
+			</div>
+			<div class="meta_rel_doc meta_single">
+				<span>
+				</span>
+			</div>
+			<div class="meta_chapters meta_single">
+			</div>
+			<div class="meta_allworks meta_single">
+				<ul></ul>
+			</div>
+			<div class="meta_related meta_single">
+				<ul></ul>
+			</div>
+
+		</div>
+		<!--/.meta_wrap-->
+
+
+	</div>
+	<!--/.ui_detail-->
+
+
+	<div class="no_camera">
+		<span>
+			CAMERA FUNCTION IS NOT AVAILABLE AS YOU HAVE NOT ALLOWED THIS BROWSER TO ACCESS YOUR DEVICE'S CAMERA FUNCTION.
+		</span>
+	</div>
+	<!--/.no_camera-->
+
+
+
+	<div class="cam_component">
+
+		<div class="ui_cam">
+			<video id="cam_feed" class="filter_sepia" playsinline autoplay></video>
+			<div class="noise_overlay"></div>
+			<canvas id="snapshot_canvas"></canvas>
+			<img class="snapshot_store" src="">
+
+			<div class="ratio_guide">
+				<img src="img/ratio_overlay.png">
+				<div class="location_text">이 산줄기를 타고, 허연 신작로가 널따랗게 커브를 그리며 돌아간 산지 일대의 구멍들 속에 그들은 살고 있었다.</div>
+				<div class="cam_blackbar"></div>
+			</div>
+				
+		</div>
+		<!--/.ui_cam-->
+
+		<div class="ui_share">
+			<div class="share_img">
+				<canvas id="d_canvas" style="border:1px solid #ccc"></canvas>
+			</div>
+			<div class="share_text">
+				나의 성북구의 추억이 저장되었습나다<br>
+				주변 사람들과 추억을 나누어보세요.
+			</div>
+
+			<div class="share_modal">
+				<div class="modal_bg"></div>
+				<div class="wrap_modal">
+					<div class="btn_close close_share"><img src="img/icn/icn_close.svg"></div>
+					<span>Copy this URL</span>
+					<pre></pre>
+					<div class="copy_url">복사</div>
+				</div>
+			</div>
+		</div>
+		<!--/.ui_share-->
+
+
+		<div class="camera_buttons">
+			<div class="cam_close"><img src="img/icn/icn_close.svg"></div>
+			<div id="cam_capture" class="cam_live"><img src="img/icn/icn_camera_white.svg"></div>
+			<div class="cam_filter"><img src="img/icn/icn_filter.svg"></div>
+			<div class="cam_share"><img src="img/icn/icn_share.svg"></div>
+		</div>
+
+	</div>
+	<!--/.cam_component-->
+
+
+
+
+	<div class="ui_nolandscape">
+		<span>
+			<img src="img/icn/icn_orientation.svg">
+			THIS WEBSITE DOESNT SUPPORT LANDSCAPE.<br>PLEASE CHANGE YOUR DEVICE ORIENTATION<br>TO PORTRAIT.
+		</span>
+	</div>
+
+	<script src="js/jquery-3.2.1.min.js"></script>
+    <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v0.49.0/mapbox-gl.js"></script>
+	<script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.3.0/mapbox-gl-geocoder.min.js"></script>
+	<script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-language/v0.10.0/mapbox-gl-language.js"></script>
+	<script src="js/fabric.min.js"></script>
+	<script src="js/DetectRTC.min.js"></script>
+	<script src="js/slick.min.js"></script>
+	<script src="js/responsivevoice.min.js"></script>
+	<script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+	
+	<!-- <script src="js/data.js"></script> -->
+	<script src="js/scripts.js"></script>
+
+</body>
+</html>

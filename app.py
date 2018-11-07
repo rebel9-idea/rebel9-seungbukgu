@@ -30,12 +30,17 @@ def resp(code, data):
     return Response(
         status=code,
         mimetype="application/json",
+        headers={'Access-Control-Allow-Origin': '*'},
         response=to_json(data)
     )
 
 @app.route('/')
 def hello_world():
-    return 'Hello World!'
+    return render_template('index.html')
+
+@app.route('/m')
+def adminpage():
+    return render_template('admin.html')
 
 @app.route('/place/<path:pathid>', methods=['POST'])
 def getplacebyid(pathid):
@@ -47,6 +52,8 @@ def getplacebyid(pathid):
     if code != 'rebel9266!':
         return abort(400, {'Error': 'Not valid code!'})
     for place in thedb.Places.collection.find({}, {'_id': False}):
+        if len(place['code']) > 6:
+            place['code'] = place['code'][:-1]
         if pathid == place['code']:
             final = {}
             final['work'] = []
@@ -59,7 +66,7 @@ def getplacebyid(pathid):
                     workdict[chapter['work_code']]['chapters'] = []
                     workdict[chapter['work_code']]['chapters'].append(chapter)
                     workdict[chapter['work_code']]['author'] = \
-                    [b for b in thedb.Authors.collection.find() if b['code'] == workdict[chapter['work_code']]['author_code']][0]
+                    [b for b in thedb.Authors.collection.find({}, {'_id': False}) if b['code'] == workdict[chapter['work_code']]['author_code']][0]
                     workdict[chapter['work_code']]['author']['rel_places'] = []
 
                     relworks = [w for w in thedb.Works.collection.find({}, {'_id': False}) if
@@ -68,7 +75,7 @@ def getplacebyid(pathid):
                         relwork['the_array'] = [pl for pl in thedb.Chapters.collection.find({}, {'_id': False}) if pl['work_code'] == relwork['code']]
                         for pl1 in relwork['the_array']:
                             try:
-                                k = pl1['place_code'].split(', ')
+                                k = pl1['place_code']
                                 for i in k:
                                     try:
                                         workdict[chapter['work_code']]['author']['rel_places'].append([
@@ -99,6 +106,7 @@ def getplacebyid(pathid):
                                 print(e)
             place['work'] = list(workdict.values())
             return resp(200, {'Result': place})
+    place['work'] = []
     return resp(200, {'Error': 'No additional information on the place', 'Result': place})
 
 @app.route('/init', methods=['POST'])
@@ -254,7 +262,7 @@ def uploadimages():
     k = uuid.uuid4()
     filename = 'seungbukgu_' + str(k)
     hashids = Hashids(salt=hashsalt)
-    theid = hashids.encode(len(list(thedb.Photo.collection.find())))
+    theid = hashids.encode(len(list(thedb.Photo.collection.find({}, {'_id': False}))))
     try:
         with open('./images/' + filename + '.jpg', 'wb') as fh:
             fh.write(base64.decodebytes(image_data))

@@ -1,0 +1,1154 @@
+{
+    "container": {
+        "sn": 99,
+        "key": "sample",
+        "name": "샘플",
+        "components": [
+            {
+                "sn": 1,
+                "key": "comp00001",
+                "value": "b",
+                "label": "검토",
+                "definition": "checkbox",
+                "type": null,
+                "placeholder": null,
+                "postscript": null,
+                "option": null,
+                "grid": 8
+            },
+            {
+                "sn": 2,
+                "key": "comp00002",
+                "value": "k",
+                "label": "상위연번",
+                "definition": "select",
+                "type": "container",
+                "placeholder": "자료명을 입력해주세요(자동완성)",
+                "postscript": "※하위에 속하는 자료일 경우, 상위 자료를 등록해주세요.",
+                "option": {
+                    "reference": 99,
+                    "autocomplete": true
+                },
+                "grid": 8
+            },
+            {
+                "sn": 3,
+                "key": "comp00003",
+                "value": null,
+                "label": "기본정보",
+                "definition": "header",
+                "type": null,
+                "placeholder": null,
+                "postscript": null,
+                "option": {
+                    "level": 1,
+                    "anchor": true
+                },
+                "grid": 16
+            },
+            {
+                "sn": 4,
+                "key": "comp00004",
+                "value": "s",
+                "label": "명칭",
+                "definition": "input",
+                "type": "text",
+                "placeholder": null,
+                "postscript": null,
+                "option": {
+                    "required": true,
+                    "max": 100
+                },
+                "grid": 8
+            },
+            {
+                "sn": 5,
+                "key": "comp00005",
+                "value": "s",
+                "label": "이명칭",
+                "definition": "input",
+                "type": "text",
+                "placeholder": null,
+                "postscript": null,
+                "option": null,
+                "grid": 8
+            },
+            {
+                "sn": 6,
+                "key": "comp00006",
+                "value": "s",
+                "label": "영문명칭",
+                "definition": "input",
+                "type": "text",
+                "placeholder": null,
+                "postscript": null,
+                "option": null,
+                "grid": 8
+            },
+            {
+                "sn": 7,
+                "key": "comp00007",
+                "value": "s",
+                "label": "한자명칭",
+                "definition": "input",
+                "type": "text",
+                "placeholder": null,
+                "postscript": null,
+                "option": null,
+                "grid": 8
+            },
+            {
+                "sn": 8,
+                "key": "comp00008",
+                "value": "s",
+                "label": "비고",
+                "definition": "input",
+                "type": "text",
+                "placeholder": null,
+                "postscript": null,
+                "option": null,
+                "grid": 16
+            },
+            {
+                "sn": 9,
+                "key": "comp00009",
+                "value": null,
+                "label": "유형",
+                "definition": "header",
+                "type": null,
+                "placeholder": null,
+                "postscript": null,
+                "option": {
+                    "level": 2
+                },
+                "grid": 16
+            },
+            {
+                "sn": 10,
+                "key": "comp00010",
+                "value": "k",
+                "label": "유형",
+                "definition": "select",
+                "type": "tree",
+                "placeholder": "유형을 선택하세요",
+                "postscript": null,
+                "option": {
+                    "required": true,
+                    "reference": 55,
+                    "depth": 2
+                },
+                "grid": 8
+            },
+            {
+                "sn": 11,
+                "key": "comp00011",
+                "value": "k",
+                "label": "성별",
+                "definition": "radio",
+                "type": "code",
+                "placeholder": null,
+                "postscript": null,
+                "option": {
+                    "reference": 212
+                },
+                "grid": 16
+            },
+            {
+                "sn": 12,
+                "key": "comp00012",
+                "value": "s",
+                "label": "권",
+                "definition": "input",
+                "type": "text",
+                "placeholder": null,
+                "postscript": null,
+                "option": null,
+                "grid": 4
+            },
+            {
+                "sn": 13,
+                "key": "comp00013",
+                "value": "s",
+                "label": "호",
+                "definition": "input",
+                "type": "text",
+                "placeholder": null,
+                "postscript": null,
+                "option": null,
+                "grid": 4
+            },
+            {
+                "sn": 14,
+                "key": "comp00014",
+                "value": "n",
+                "label": "중요도",
+                "definition": "radio",
+                "type": "number",
+                "placeholder": null,
+                "postscript": null,
+                "option": {
+                    "required": true,
+                    "start": 1,
+                    "end": 5
+                },
+                "grid": 8
+            },
+            {
+                "sn": 15,
+                "key": "comp00015",
+                "value": "a-s",
+                "label": "작가명",
+                "definition": "input",
+                "type": "tag",
+                "placeholder": null,
+                "postscript": "※연관인물(성북구의 인물)로 등록되어 있는 경우, 작가명(연관인물) 항목에서 선택해주세요.",
+                "option": null,
+                "grid": 8
+            },
+            {
+                "sn": 16,
+                "key": "comp00016",
+                "value": "a-k",
+                "label": "작가명(연관인물)",
+                "definition": "select",
+                "type": "container",
+                "placeholder": "작가명을 입력해주세요(자동완성)",
+                "postscript": null,
+                "option": {
+                    "reference": 2,
+                    "autocomplete": true
+                },
+                "grid": 8
+            },
+            {
+                "sn": 17,
+                "key": "comp00017",
+                "value": null,
+                "label": "시기",
+                "definition": "header",
+                "type": null,
+                "placeholder": null,
+                "postscript": null,
+                "option": {
+                    "level": 1,
+                    "anchor": true
+                },
+                "grid": 16
+            },
+            {
+                "sn": 18,
+                "key": "comp00018",
+                "value": null,
+                "label": null,
+                "definition": "set",
+                "type": null,
+                "placeholder": null,
+                "postscript": null,
+                "option": {
+                    "multiple": true
+                },
+                "grid": 16,
+                "components": [
+                    {
+                        "sn": 19,
+                        "key": "comp00019",
+                        "value": "d",
+                        "label": "시작시기",
+                        "definition": "input",
+                        "type": "date",
+                        "placeholder": "YYYYMMDD",
+                        "postscript": null,
+                        "option": null,
+                        "grid": 4
+                    },
+                    {
+                        "sn": 20,
+                        "key": "comp00020",
+                        "value": "d",
+                        "label": "종료시기",
+                        "definition": "input",
+                        "type": "date",
+                        "placeholder": "YYYYMMDD",
+                        "postscript": null,
+                        "option": null,
+                        "grid": 4
+                    },
+                    {
+                        "sn": 21,
+                        "key": "comp00021",
+                        "value": "k",
+                        "label": "시대",
+                        "definition": "select",
+                        "type": "code",
+                        "placeholder": "선택하세요",
+                        "postscript": null,
+                        "option": {
+                            "reference": 216
+                        },
+                        "grid": 4
+                    },
+                    {
+                        "sn": 22,
+                        "key": "comp00022",
+                        "value": "t",
+                        "label": "비고",
+                        "definition": "input",
+                        "type": "text",
+                        "placeholder": null,
+                        "postscript": null,
+                        "option": null,
+                        "grid": 4
+                    }
+                ]
+            },
+            {
+                "sn": 23,
+                "key": "comp00023",
+                "value": null,
+                "label": "생산시기",
+                "definition": "header",
+                "type": null,
+                "placeholder": null,
+                "postscript": null,
+                "option": {
+                    "level": 1,
+                    "anchor": true
+                },
+                "grid": 16
+            },
+            {
+                "sn": 24,
+                "key": "comp00024",
+                "value": null,
+                "label": null,
+                "definition": "set",
+                "type": null,
+                "placeholder": null,
+                "postscript": null,
+                "option": {
+                    "multiple": true
+                },
+                "grid": 16,
+                "components": [
+                    {
+                        "sn": 25,
+                        "key": "comp00025",
+                        "value": "d",
+                        "label": "생산일",
+                        "definition": "input",
+                        "type": "date",
+                        "placeholder": "YYYYMMDD",
+                        "postscript": null,
+                        "option": null,
+                        "grid": 4
+                    },
+                    {
+                        "sn": 26,
+                        "key": "comp00026",
+                        "value": "k",
+                        "label": "시대",
+                        "definition": "select",
+                        "type": "code",
+                        "placeholder": "선택하세요",
+                        "postscript": null,
+                        "option": {
+                            "reference": 216
+                        },
+                        "grid": 4
+                    },
+                    {
+                        "sn": 27,
+                        "key": "comp00027",
+                        "value": "k",
+                        "label": "생산일유형",
+                        "definition": "select",
+                        "type": "code",
+                        "placeholder": "선택하세요",
+                        "postscript": null,
+                        "option": {
+                            "reference": 210
+                        },
+                        "grid": 4
+                    },
+                    {
+                        "sn": 28,
+                        "key": "comp00028",
+                        "value": "s",
+                        "label": "비고",
+                        "definition": "input",
+                        "type": "text",
+                        "placeholder": null,
+                        "postscript": null,
+                        "option": null,
+                        "grid": 4
+                    }
+                ]
+            },
+            {
+                "sn": 29,
+                "key": "comp00029",
+                "value": null,
+                "label": "생산자",
+                "definition": "header",
+                "type": null,
+                "placeholder": null,
+                "postscript": null,
+                "option": {
+                    "level": 1,
+                    "anchor": true
+                },
+                "grid": 16
+            },
+            {
+                "sn": 30,
+                "key": "comp00030",
+                "value": "s",
+                "label": "이름",
+                "definition": "input",
+                "type": "text",
+                "placeholder": null,
+                "postscript": null,
+                "option": null,
+                "grid": 8
+            },
+            {
+                "sn": 31,
+                "key": "comp00031",
+                "value": "k",
+                "label": "이름유형",
+                "definition": "select",
+                "type": "code",
+                "placeholder": "선택하세요",
+                "postscript": null,
+                "option": {
+                    "reference": 207
+                },
+                "grid": 4
+            },
+            {
+                "sn": 32,
+                "key": "comp00032",
+                "value": "k",
+                "label": "생산자유형",
+                "definition": "select",
+                "type": "code",
+                "placeholder": "선택하세요",
+                "postscript": null,
+                "option": {
+                    "reference": 204
+                },
+                "grid": 4
+            },
+            {
+                "sn": 33,
+                "key": "comp00033",
+                "value": null,
+                "label": "설명",
+                "definition": "header",
+                "type": null,
+                "placeholder": null,
+                "postscript": null,
+                "option": {
+                    "level": 1,
+                    "anchor": true
+                },
+                "grid": 16
+            },
+            {
+                "sn": 34,
+                "key": "comp00034",
+                "value": null,
+                "label": null,
+                "definition": "set",
+                "type": null,
+                "placeholder": null,
+                "postscript": null,
+                "option": {
+                    "multiple": true
+                },
+                "grid": 16,
+                "components": [
+                    {
+                        "sn": 35,
+                        "key": "comp00035",
+                        "value": "s",
+                        "label": "설명",
+                        "definition": "textarea",
+                        "type": null,
+                        "placeholder": null,
+                        "postscript": null,
+                        "option": {
+                            "row": 10,
+                            "min": 0,
+                            "max": 4000
+                        },
+                        "grid": 16
+                    },
+                    {
+                        "sn": 36,
+                        "key": "comp00036",
+                        "value": "a-k",
+                        "label": "근거자료",
+                        "definition": "select",
+                        "type": "container",
+                        "placeholder": "자료명을 입력해주세요(자동완성)",
+                        "postscript": null,
+                        "option": {
+                            "reference": 8,
+                            "autocomplete": true
+                        },
+                        "grid": 16
+                    }
+                ]
+            },
+            {
+                "sn": 37,
+                "key": "comp00037",
+                "value": null,
+                "label": "위치",
+                "definition": "header",
+                "type": null,
+                "placeholder": null,
+                "postscript": null,
+                "option": {
+                    "level": 1,
+                    "anchor": true
+                },
+                "grid": 16
+            },
+            {
+                "sn": 38,
+                "key": "comp00038",
+                "value": null,
+                "label": null,
+                "definition": "set",
+                "type": null,
+                "placeholder": null,
+                "postscript": null,
+                "option": {
+                    "multiple": true
+                },
+                "grid": 16,
+                "components": [
+                    {
+                        "sn": 39,
+                        "key": "comp00039",
+                        "value": "s",
+                        "label": "도·광역시",
+                        "definition": "input",
+                        "type": "text",
+                        "placeholder": null,
+                        "postscript": null,
+                        "option": null,
+                        "grid": 4
+                    },
+                    {
+                        "sn": 40,
+                        "key": "comp00040",
+                        "value": "s",
+                        "label": "시·군·구",
+                        "definition": "input",
+                        "type": "text",
+                        "placeholder": null,
+                        "postscript": null,
+                        "option": null,
+                        "grid": 4
+                    },
+                    {
+                        "sn": 41,
+                        "key": "comp00041",
+                        "value": "s",
+                        "label": "우편번호",
+                        "definition": "input",
+                        "type": "text",
+                        "placeholder": null,
+                        "postscript": null,
+                        "option": {
+                            "min": 0,
+                            "max": 5
+                        },
+                        "grid": 4
+                    },
+                    {
+                        "sn": 42,
+                        "key": "comp00042",
+                        "value": "s",
+                        "label": "상세주소(지번)",
+                        "definition": "input",
+                        "type": "text",
+                        "placeholder": null,
+                        "postscript": null,
+                        "option": null,
+                        "grid": 8
+                    },
+                    {
+                        "sn": 43,
+                        "key": "comp00043",
+                        "value": "s",
+                        "label": "상세주소(도로명)",
+                        "definition": "input",
+                        "type": "text",
+                        "placeholder": null,
+                        "postscript": null,
+                        "option": null,
+                        "grid": 8
+                    },
+                    {
+                        "sn": 44,
+                        "key": "comp00044",
+                        "value": "s",
+                        "label": "비고",
+                        "definition": "input",
+                        "type": "text",
+                        "placeholder": null,
+                        "postscript": null,
+                        "option": null,
+                        "grid": 16
+                    }
+                ]
+            },
+            {
+                "sn": 45,
+                "key": "comp00045",
+                "value": null,
+                "label": "저작권",
+                "definition": "header",
+                "type": null,
+                "placeholder": null,
+                "postscript": null,
+                "option": {
+                    "level": 1,
+                    "anchor": true
+                },
+                "grid": 16
+            },
+            {
+                "sn": 46,
+                "key": "comp00046",
+                "value": "k",
+                "label": "획득여부",
+                "definition": "radio",
+                "type": "code",
+                "placeholder": null,
+                "postscript": null,
+                "option": {
+                    "reference": 135
+                },
+                "grid": 5
+            },
+            {
+                "sn": 47,
+                "key": "comp00047",
+                "value": "s",
+                "label": "저작권자",
+                "definition": "input",
+                "type": "text",
+                "placeholder": null,
+                "postscript": null,
+                "option": null,
+                "grid": 5
+            },
+            {
+                "sn": 48,
+                "key": "comp00048",
+                "value": "d",
+                "label": "만료일",
+                "definition": "input",
+                "type": "date",
+                "placeholder": "YYYYMMDD",
+                "postscript": null,
+                "option": {
+                    "min": 0,
+                    "max": 8
+                },
+                "grid": 5
+            },
+            {
+                "sn": 49,
+                "key": "comp00049",
+                "value": null,
+                "label": "기타",
+                "definition": "header",
+                "type": null,
+                "placeholder": null,
+                "postscript": null,
+                "option": {
+                    "level": 1,
+                    "anchor": true
+                },
+                "grid": 16
+            },
+            {
+                "sn": 50,
+                "key": "comp00050",
+                "value": "s",
+                "label": "선정이유",
+                "definition": "textarea",
+                "type": null,
+                "placeholder": null,
+                "postscript": null,
+                "option": {
+                    "row": 5,
+                    "min": 0,
+                    "max": 4000
+                },
+                "grid": 16
+            },
+            {
+                "sn": 51,
+                "key": "comp00051",
+                "value": "s",
+                "label": "비고",
+                "definition": "textarea",
+                "type": null,
+                "placeholder": null,
+                "postscript": null,
+                "option": {
+                    "row": 5,
+                    "min": 0,
+                    "max": 4000
+                },
+                "grid": 16
+            },
+            {
+                "sn": 52,
+                "key": "comp00052",
+                "value": null,
+                "label": "문화재",
+                "definition": "header",
+                "type": null,
+                "placeholder": null,
+                "postscript": null,
+                "option": {
+                    "level": 2
+                },
+                "grid": 16
+            },
+            {
+                "sn": 53,
+                "key": "comp00053",
+                "value": "k",
+                "label": "지정유형",
+                "definition": "select",
+                "type": "code",
+                "placeholder": null,
+                "postscript": null,
+                "option": {
+                    "reference": 119
+                },
+                "grid": 4
+            },
+            {
+                "sn": 54,
+                "key": "comp00054",
+                "value": "s",
+                "label": "지정번호",
+                "definition": "input",
+                "type": "text",
+                "placeholder": null,
+                "postscript": null,
+                "option": {
+                    "min": 0,
+                    "max": 8
+                },
+                "grid": 4
+            },
+            {
+                "sn": 55,
+                "key": "comp00055",
+                "value": "d",
+                "label": "지정일",
+                "definition": "input",
+                "type": "date",
+                "placeholder": "YYYYMMDD",
+                "postscript": null,
+                "option": {
+                    "min": 0,
+                    "max": 8
+                },
+                "grid": 4
+            },
+            {
+                "sn": 56,
+                "key": "comp00056",
+                "value": "s",
+                "label": "비고",
+                "definition": "input",
+                "type": "text",
+                "placeholder": null,
+                "postscript": null,
+                "option": null,
+                "grid": 16
+            },
+            {
+                "sn": 57,
+                "key": "comp00057",
+                "value": "s",
+                "label": "설명",
+                "definition": "textarea",
+                "type": null,
+                "placeholder": null,
+                "postscript": null,
+                "option": {
+                    "row": 10,
+                    "min": 0,
+                    "max": 4000
+                },
+                "grid": 16
+            },
+            {
+                "sn": 58,
+                "key": "comp00058",
+                "value": null,
+                "label": "전자기록물",
+                "definition": "header",
+                "type": null,
+                "placeholder": null,
+                "postscript": null,
+                "option": {
+                    "level": 1,
+                    "anchor": true
+                },
+                "grid": 16
+            },
+            {
+                "sn": 59,
+                "key": "comp00059",
+                "value": "a-k",
+                "label": null,
+                "definition": "select",
+                "type": "container",
+                "placeholder": null,
+                "postscript": null,
+                "option": {
+                    "reference": 9,
+                    "autocomplete": true
+                },
+                "grid": 16
+            },
+            {
+                "sn": 60,
+                "key": "comp00060",
+                "value": null,
+                "label": "연관자료",
+                "definition": "header",
+                "type": null,
+                "placeholder": null,
+                "postscript": null,
+                "option": {
+                    "level": 1,
+                    "anchor": true
+                },
+                "grid": 16
+            },
+            {
+                "sn": 61,
+                "key": "comp00061",
+                "value": "a-k",
+                "label": "연관사건",
+                "definition": "select",
+                "type": "container",
+                "placeholder": "사건명을 입력해주세요(자동완성)",
+                "postscript": null,
+                "option": {
+                    "reference": 1,
+                    "autocomplete": true
+                },
+                "grid": 16
+            },
+            {
+                "sn": 62,
+                "key": "comp00062",
+                "value": "a-k",
+                "label": "연관인물",
+                "definition": "select",
+                "type": "container",
+                "placeholder": "인물명을 입력해주세요(자동완성)",
+                "postscript": null,
+                "option": {
+                    "reference": 2,
+                    "autocomplete": true
+                },
+                "grid": 16
+            },
+            {
+                "sn": 63,
+                "key": "comp00063",
+                "value": "a-k",
+                "label": "연관장소",
+                "definition": "select",
+                "type": "container",
+                "placeholder": "장소명을 입력해주세요(자동완성)",
+                "postscript": null,
+                "option": {
+                    "reference": 3,
+                    "autocomplete": true
+                },
+                "grid": 16
+            },
+            {
+                "sn": 64,
+                "key": "comp00064",
+                "value": "a-k",
+                "label": "연관유물",
+                "definition": "select",
+                "type": "container",
+                "placeholder": "유물명을 입력해주세요(자동완성)",
+                "postscript": null,
+                "option": {
+                    "reference": 4,
+                    "autocomplete": true
+                },
+                "grid": 16
+            },
+            {
+                "sn": 65,
+                "key": "comp00065",
+                "value": "a-k",
+                "label": "연관작품",
+                "definition": "select",
+                "type": "container",
+                "placeholder": "작품명을 입력해주세요(자동완성)",
+                "postscript": null,
+                "option": {
+                    "reference": 5,
+                    "autocomplete": true
+                },
+                "grid": 16
+            },
+            {
+                "sn": 66,
+                "key": "comp00066",
+                "value": "a-k",
+                "label": "연관문헌",
+                "definition": "select",
+                "type": "container",
+                "placeholder": "문헌명을 입력해주세요(자동완성)",
+                "postscript": null,
+                "option": {
+                    "reference": 6,
+                    "autocomplete": true
+                },
+                "grid": 16
+            },
+            {
+                "sn": 67,
+                "key": "comp00067",
+                "value": "a-k",
+                "label": "연관지역",
+                "definition": "select",
+                "type": "code",
+                "placeholder": "지역명을 입력해주세요(자동완성)",
+                "postscript": null,
+                "option": {
+                    "reference": 138,
+                    "autocomplete": true
+                },
+                "grid": 16
+            },
+            {
+                "sn": 68,
+                "key": "comp00068",
+                "value": null,
+                "label": "파일정보",
+                "definition": "header",
+                "type": null,
+                "placeholder": null,
+                "postscript": null,
+                "option": {
+                    "level": 1,
+                    "anchor": true
+                },
+                "grid": 16
+            },
+            {
+                "sn": 69,
+                "key": "comp00069",
+                "value": "s",
+                "label": "확장자",
+                "definition": "input",
+                "type": "text",
+                "placeholder": null,
+                "postscript": null,
+                "option": null,
+                "grid": 4
+            },
+            {
+                "sn": 70,
+                "key": "comp00070",
+                "value": "s",
+                "label": "해상도",
+                "definition": "input",
+                "type": "text",
+                "placeholder": null,
+                "postscript": null,
+                "option": null,
+                "grid": 4
+            },
+            {
+                "sn": 71,
+                "key": "comp00071",
+                "value": "s",
+                "label": "파일크기",
+                "definition": "input",
+                "type": "text",
+                "placeholder": null,
+                "postscript": null,
+                "option": null,
+                "grid": 4
+            },
+            {
+                "sn": 72,
+                "key": "comp00072",
+                "value": "d",
+                "label": "촬영일",
+                "definition": "input",
+                "type": "date",
+                "placeholder": "YYYYMMDD",
+                "postscript": null,
+                "option": null,
+                "grid": 4
+            },
+            {
+                "sn": 73,
+                "key": "comp00073",
+                "value": "s",
+                "label": "출처",
+                "definition": "input",
+                "type": "text",
+                "placeholder": null,
+                "postscript": null,
+                "option": null,
+                "grid": 6
+            },
+            {
+                "sn": 74,
+                "key": "comp00074",
+                "value": "s",
+                "label": "출처세부",
+                "definition": "input",
+                "type": "text",
+                "placeholder": null,
+                "postscript": null,
+                "option": null,
+                "grid": 12
+            },
+            {
+                "sn": 75,
+                "key": "comp00075",
+                "value": null,
+                "label": "단체정보",
+                "definition": "header",
+                "type": null,
+                "placeholder": null,
+                "postscript": null,
+                "option": {
+                    "level": 1,
+                    "anchor": true
+                },
+                "grid": 16
+            },
+            {
+                "sn": 76,
+                "key": "comp00076",
+                "value": "s",
+                "label": "사이트명",
+                "definition": "input",
+                "type": "text",
+                "placeholder": null,
+                "postscript": null,
+                "option": {
+                    "required": true,
+                    "max": 100
+                },
+                "grid": 8
+            },
+            {
+                "sn": 77,
+                "key": "comp00077",
+                "value": null,
+                "label": null,
+                "definition": "empty",
+                "type": null,
+                "placeholder": null,
+                "postscript": null,
+                "option": null,
+                "grid": 8
+            },
+            {
+                "sn": 78,
+                "key": "comp00078",
+                "value": "s",
+                "label": "단체명",
+                "definition": "input",
+                "type": "text",
+                "placeholder": null,
+                "postscript": "※연관인물(성북구의 인물)로 등록되어 있는 경우, 단체명(연관인물) 항목에서 선택해주세요.",
+                "option": null,
+                "grid": 8
+            },
+            {
+                "sn": 79,
+                "key": "comp00079",
+                "value": "a-k",
+                "label": "단체명(연관단체)",
+                "definition": "select",
+                "type": "container",
+                "placeholder": "단체명을 입력해주세요(자동완성)",
+                "postscript": null,
+                "option": {
+                    "reference": 7,
+                    "autocomplete": true
+                },
+                "grid": 8
+            },
+            {
+                "sn": 80,
+                "key": "comp00080",
+                "value": null,
+                "label": "URL",
+                "definition": "header",
+                "type": null,
+                "placeholder": null,
+                "postscript": null,
+                "option": {
+                    "level": 1,
+                    "anchor": true
+                },
+                "grid": 16
+            },
+            {
+                "sn": 81,
+                "key": "comp00081",
+                "value": null,
+                "label": null,
+                "definition": "set",
+                "type": null,
+                "placeholder": null,
+                "postscript": null,
+                "option": {
+                    "multiple": true
+                },
+                "grid": 16,
+                "components": [
+                    {
+                        "sn": 82,
+                        "key": "comp00082",
+                        "value": "s",
+                        "label": null,
+                        "definition": "input",
+                        "type": "text",
+                        "placeholder": null,
+                        "postscript": null,
+                        "option": null,
+                        "grid": 16
+                    }
+                ]
+            }
+        ]
+    },
+    "meta": {
+        "message": "OK",
+        "status": 200
+    }
+}
