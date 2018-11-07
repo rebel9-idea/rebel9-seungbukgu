@@ -2,7 +2,11 @@
 	//http://192.168.0.188:7999/init POST data={"code": "rebel9266!"}
 	//http://192.168.0.188:7999/place/%placeid% POST data={"code": "rebel9266!"}
 
-	var domain = "https://sbculture.project9.co.kr/"
+	// local test domain
+	var domain = "http://192.168.0.188:7999/"
+	// actual domain
+	var domain = "https://sbculture.project9.co.kr/";
+
 
 	var all_data;
 	var data_detail;
@@ -117,6 +121,7 @@
 			    "features": []
 			};
 
+			console.log('before ajax data request')
 			// DATA get all place data
 		    $.ajax({
 				method: "POST",
@@ -300,7 +305,10 @@
 	function show_location_error(error) {
 		supports_location = false;
 
+		// hide location update if user no location 
 		toggle_updatelocation(false);
+		$(".btn_update_loc").hide();
+		$(".ui_map_bottom").addClass("no_location")
 
 		console.log("error",error);
 		$(".map_status").html(error.message);	  
@@ -390,12 +398,12 @@
 		        	}
 
 		        	// // hide cam buttons if user not in SBG
-		        	// $(".btn_opencam").hide();
-		        	// $(".ui_map_bottom").addClass("no_cam")
+		        	$(".btn_opencam").hide();
+		        	$(".ui_map_bottom").addClass("no_cam")
 
 		        	// show cam even if user is not in sbg
-					$(".btn_opencam").show();	
-					$(".ui_map_bottom").removeClass("no_cam")
+					// $(".btn_opencam").show();	
+					// $(".ui_map_bottom").removeClass("no_cam")
 
 
 		        	// stop checking interval if user goes out of SBG
@@ -663,6 +671,7 @@
 	function clear_map() {
 		$(".marker_people").remove();
 		$(".marker_floaters").remove();
+		$('.marker_places').css('background-image', 'url(img/icn/marker_place.svg)');	
 
 		$(".mapboxgl-canvas-container").removeClass("showing_relations");
 		$(".marker_places").removeClass("show_relations");	
@@ -1228,6 +1237,7 @@
 					<div class="chapter_read read_off"><div class="tts_read">READ</div><div class="tts_stopread">STOP</div></div>\
 				</div>\
 				<span>'+data_detail.desc+'</span>\
+				<div class="expand_desc">더 보기 &#9662;</div>\
 			')
 			tts_text = data_detail.desc;
 
@@ -1304,6 +1314,7 @@
 
 			//  related data
 			if (data_type == 'place') {
+				console.log(data_detail)
 				if (data_detail.work.length > 0) {
 					// clear related each time on new detail load
 					$('.meta_related').show();
@@ -1356,7 +1367,7 @@
 	// END
 
 
-    $('.expand_desc').click(function() {
+    $(document).on("click",".expand_desc",function(){
 
       if ( $('.meta_desc span').hasClass('open') ) {	
         
@@ -1409,12 +1420,13 @@
 		current_place_index = $(this).attr("data-index");
 		var data_code = $(this).attr("data-code");
 			
+
 		// check if this place has related places
 		// if no, directly open details panel instead of zooming in to place marker first
 		// if 1st click, zoom to place marker
 		// if 2nd click, open detail
 
-		console.log(all_data.places[current_place_index].work.length)
+		// console.log(all_data.places[current_place_index].work.length)
 		if ( $(this).hasClass("show_relations")  ) {
 			// console.log('case1');
 			populate_details("place", current_place_index, data_code);
@@ -1443,6 +1455,13 @@
 
 				check_relation(current_place_index);	
 				
+				if ( all_data.places[current_place_index].images.length > 0 ) {
+					$(this).css('background-image', 'url('+domain.substring(0, domain.length - 1)+all_data.places[1].images[0].image_thumb+')');	
+					console.log('case1')
+				} else {
+					console.log('case2')
+					$(this).css('background-image', 'url(img/icn/marker_places_active_default.png)');	
+				}
 
 				// $(".ui_detail").fadeIn();
 				$('.marker_places').removeClass("show_relations");	
