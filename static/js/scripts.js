@@ -2,7 +2,7 @@
 	//http://192.168.0.188:7999/init POST data={"code": "rebel9266!"}
 	//http://192.168.0.188:7999/place/%placeid% POST data={"code": "rebel9266!"}
 
-	var domain = "http://192.168.0.188:7999/"
+	var domain = "https://sbculture.project9.co.kr/"
 
 	var all_data;
 	var data_detail;
