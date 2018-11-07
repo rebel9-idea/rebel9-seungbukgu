@@ -23,9 +23,9 @@ APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 APP_STATIC = os.path.join(APP_ROOT, 'static')
 UPLOAD_FOLDER = os.path.join(APP_ROOT, 'uploads')
 
-@app.route('/.well-known/acme-challenge/<path:verid>')
-def forverification(verid):
-    return send_from_directory(APP_STATIC + '/verif',  verid)
+# @app.route('/.well-known/acme-challenge/<path:verid>')
+# def forverification(verid):
+#     return send_from_directory(APP_STATIC + '/verif',  verid)
 
 def to_json(data):
     return json.dumps(data) + "\n"
@@ -42,8 +42,9 @@ def resp(code, data):
 def hello_world():
     return render_template('index.html')
 
-@app.route('/m')
-def adminpage():
+@app.route('/m/', defaults={'path': ''})
+@app.route('/m/<path:path>')
+def adminpage(path):
     return render_template('admin.html')
 
 @app.route('/place/<path:pathid>', methods=['POST'])
