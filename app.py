@@ -25,7 +25,7 @@ UPLOAD_FOLDER = os.path.join(APP_ROOT, 'uploads')
 
 @app.route('/.well-known/acme-challenge/<path:verid>')
 def forverification(verid):
-    return send_from_directory(APP_STATIC + '/',  verid)
+    return send_from_directory(APP_STATIC + '/verif',  verid)
 
 def to_json(data):
     return json.dumps(data) + "\n"
