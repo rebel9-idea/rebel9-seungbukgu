@@ -1388,11 +1388,16 @@
 
 			} else {
 
-				$(".meta_desc").append('\
-					<div class="ribbon"><img src="img/ribbon.svg"></div>\
-					<div class="chapter_read read_off"><div class="tts_read"><img src="img/icn/icn_tts_turnon.svg"> 전체듣기</div><div class="tts_stopread"><img src="img/icn/icn_tts_turnoff.svg">  듣기종료</div></div>\
-					<span>'+data_detail.desc+'</span>\
-				')
+				if (data_detail.desc > 0) {
+					$(".meta_desc").append('\
+						<div class="ribbon"><img src="img/ribbon.svg"></div>\
+						<div class="chapter_read read_off"><div class="tts_read"><img src="img/icn/icn_tts_turnon.svg"> 전체듣기</div><div class="tts_stopread"><img src="img/icn/icn_tts_turnoff.svg">  듣기종료</div></div>\
+						<span>'+data_detail.desc+'</span>\
+					')
+				} else {
+					$(".meta_desc").hide();
+				}
+
 			}
 
 
