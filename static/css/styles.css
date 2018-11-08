@@ -1075,11 +1075,12 @@ ul, li {
   width: 100%;
   height: 100%;
 }
-.ui_cam #snapshot_canvas {
-    width: 100%;  
+.ui_cam #snapshot_canvas, .ui_cam .snapshot_store {
     position: absolute;
-    width: 0;
-    height: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    opacity: 0.01;
     overflow: hidden;
 }
 .ui_cam #cam_feed {
@@ -1098,7 +1099,7 @@ ul, li {
   filter:grayscale(1);
 }
 .ui_cam .snapshot_store {
-  display: none;
+  /*display: none;*/
 }
 .ui_cam .noise_overlay {
   position: absolute;
