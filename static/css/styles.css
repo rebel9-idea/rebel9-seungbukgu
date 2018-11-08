@@ -270,7 +270,8 @@ ul, li {
 .ui_intro .intro_loading.intro_circ {
   /*display: none;*/
 }
-.ui_intro .intro_where.intro_circ {
+.ui_intro .intro_where.intro_circ,
+.ui_intro .intro_fail.intro_circ {
   top: 57%;
 }
 .intro_success.intro_circ {

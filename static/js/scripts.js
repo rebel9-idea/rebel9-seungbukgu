@@ -334,22 +334,22 @@
 
 		if (error.code == 1) {
 			console.log("User denied the request for Geolocation.") 
-			$(".intro_fail span").html("You have denied request for Geolocation.");
+			$(".intro_fail span").html("당신의 위치를 확인할 수 없습니다");
 		} 
 		else if (error.code == 2) {
 			console.log("Location information is unavailable.") 	
-			$(".intro_fail span").html("Your location is unavailable.");	
+			$(".intro_fail span").html("당신의 위치를 확인할 수 없습니다");	
 		}
 		else if (error.code == 3) {
 			console.log("The request to get user location timed out.")	
-			$(".intro_fail span").html("Your location is unavailable.");		
+			$(".intro_fail span").html("당신의 위치를 확인할 수 없습니다");		
 		}
 		else if (error.code == 4) {
 			console.log("An unknown error occurred.")		
-			$(".intro_fail span").html("Your location is unavailable.");	
+			$(".intro_fail span").html("당신의 위치를 확인할 수 없습니다");	
 		} else {
 			console.log("An unknown error occurred.")		
-			$(".intro_fail span").html("Your location is unavailable.");	
+			$(".intro_fail span").html("당신의 위치를 확인할 수 없습니다");	
 		}
 
 
