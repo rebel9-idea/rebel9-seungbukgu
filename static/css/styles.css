@@ -733,6 +733,7 @@ ul, li {
     font-weight: 700;
     margin: 10px auto 10px;
     color: #A4A4A9;
+    cursor: pointer;
 }
 .ui_detail .meta_desc .expand_desc img {
     margin-right: 5px;
