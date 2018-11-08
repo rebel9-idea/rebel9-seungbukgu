@@ -48,7 +48,12 @@
 	// FN load mapbox map
 	function init_mapbox() {
 
-		$(" .ui_intro_bg").fadeIn();
+		$(" .ui_intro_bg").fadeIn('slow', function(){
+
+		    setTimeout(function(){ 
+		    	$(" .ui_intro_bg").addClass('animate');
+			}, 600);
+		});
 
 		mapboxgl.accessToken = "pk.eyJ1IjoiZmFyaXNrYXNzaW0iLCJhIjoiSk1MaUthdyJ9.vkxtdDbYdLi524WwlKORBw";
 		map = new mapboxgl.Map({

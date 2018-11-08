@@ -212,6 +212,9 @@ ul, li {
     background-repeat: no-repeat;
     background-position: 50% 50%;
 
+
+}
+.ui_intro .ui_intro_bg.animate {
     animation: panmap 5s ;
     animation-timing-function: ease-in-out;
     animation-fill-mode: forwards;
