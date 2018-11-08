@@ -412,12 +412,12 @@
 		        	}
 
 		        	// // hide cam buttons if user not in SBG
-		        	$(".btn_opencam").hide();
-		        	$(".ui_map_bottom").addClass("no_cam")
+		        	// $(".btn_opencam").hide();
+		        	// $(".ui_map_bottom").addClass("no_cam")
 
 		        	// show cam even if user is not in sbg
-					// $(".btn_opencam").show();	
-					// $(".ui_map_bottom").removeClass("no_cam")
+					$(".btn_opencam").show();	
+					$(".ui_map_bottom").removeClass("no_cam")
 
 
 		        	// stop checking interval if user goes out of SBG
