@@ -903,32 +903,15 @@
 
     });
 
+    new ClipboardJS('.copy_url');
+
     $('.copy_url').click(function() {
 		var text = $('.share_modal pre').html();
-		copy_clipboard(text);
 		$('.share_modal pre').addClass('copied');
 		$('.copy_url').html('복사하였습니다');
 
-		// navigator.clipboard.writeText(text).then(function() {
-		//   console.log('Async: Copying to clipboard was successful!');
-		//   $('.share_modal pre').addClass('copied');
-		//   $('.copy_url').html('복사하였습니다');
-		// }, function(err) {
-		//   console.error('Async: Could not copy text: ', err);
-		// });
     });
 
-	function copy_clipboard(str) {
-	  const el = document.createElement('textarea');
-	  el.value = str;
-	  el.setAttribute('readonly', '');
-	  el.style.position = 'absolute';
-	  el.style.left = '-9999px';
-	  document.body.appendChild(el);
-	  el.select();
-	  document.execCommand('copy');
-	  document.body.removeChild(el);
-	}
 
 
     $('.close_share').click(function() {
