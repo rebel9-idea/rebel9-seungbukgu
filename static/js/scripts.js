@@ -1388,7 +1388,7 @@
 
 			} else {
 
-				if (data_detail.desc.length > 0) {
+				if (data_detail.desc.length > 2) {
 					$(".meta_desc").show();
 					$(".meta_desc").append('\
 						<div class="ribbon"><img src="img/ribbon.svg"></div>\
