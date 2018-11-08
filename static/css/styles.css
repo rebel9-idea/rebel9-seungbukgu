@@ -1021,7 +1021,7 @@ ul, li {
 .camera_buttons {
   position: fixed;
   z-index:10;
-  bottom: 20px;
+  bottom: 10px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
