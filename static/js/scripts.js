@@ -1018,7 +1018,8 @@
             originX: "left",
             originY: "top",
             scaleX: snap_scale_factor,
-            scaleY: snap_scale_factor
+            scaleY: snap_scale_factor,
+            flipX:true
         });
 
 		// add filter
@@ -1057,7 +1058,7 @@
                 originX: "left",
                 originY: "top",
                 scaleX: noise_scale_factor,
-                scaleY: noise_scale_factor
+                scaleY: noise_scale_factor,
             });
             d_canvas.add(noise_overlay); 
 
