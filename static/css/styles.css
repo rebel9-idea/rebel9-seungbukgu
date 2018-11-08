@@ -1361,4 +1361,28 @@ and (orientation: landscape) {
   }
 }
 
+@media (max-width: 360px) {  
+  .ui_intro .intro_circ_wrap {
+      width: 230px;
+      height: 230px;
+  }
+  .ui_intro .intro_blue_circ {
+    width: 250px;
+    height: 250px;
+  }
+  .ui_intro .dir_n {
+    top:-41px;
+  }
+  .ui_intro .dir_s {
+    bottom:-40px;
+  }
+  .ui_intro .dir_e {
+      right: -32px;
+  }
+  .ui_intro .dir_w {
+    left: -36px;
+  }
+
+}
+
 
