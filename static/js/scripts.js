@@ -880,7 +880,7 @@
             $(".snapshot_store").attr("src", snapshot)
             setTimeout(function(){ 
                 add_fabric_img()
-            }, 100);
+            }, 500);
 
             // stop camera when photo is snapped
             stop_camera();
