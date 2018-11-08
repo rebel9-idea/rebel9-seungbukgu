@@ -506,6 +506,9 @@ ul, li {
   color: black;
   -webkit-overflow-scrolling: touch;
 }
+.ui_detail > * {
+
+}
 .ui_detail img {
 	width: 100%;
 	/*margin-bottom: 20px;*/
@@ -632,6 +635,7 @@ ul, li {
 .ui_detail .meta_subtitle span{
   position: relative; 
   font-weight: 600;
+  cursor: pointer;
 }
 .type_work .meta_desc {
   border-top:1px solid #A4A4A9;
@@ -760,6 +764,7 @@ ul, li {
     display: table;
     font-weight: 400;
     position: relative;
+    cursor: pointer;
 }
 .ui_detail .meta_related li:after,
 .meta_allworks li:after,
@@ -822,6 +827,7 @@ ul, li {
 }
 .tts_stopread {
   display: flex;
+  cursor: pointer;
 }
 .tts_stopread img {
     max-width: 17px;
