@@ -1916,13 +1916,13 @@
       Kakao.Link.sendDefault({
         objectType: "feed",
         content: {
-          title: "SHARE Kako Title",
-          description: "Share Kakao description",
+          title: "성북구 - 물 따라 이야기 따라",
+          description: "성북구 - 물 따라 이야기 따라 description",
           // 800x800
-          imageUrl: "https://fariskassim.com/stage/rebel9/seongbukgu/master/v6/img/ograph/ograph.jpg",
+          imageUrl: "https://sbculture.project9.co.kr/img/ograph/ograph.jpg",
           link: {
-            mobileWebUrl: "https://developers.kakao.com",
-            webUrl: "https://developers.kakao.com"
+            mobileWebUrl: "https://sbculture.project9.co.kr",
+            webUrl: "https://sbculture.project9.co.kr"
           }
         },
         buttons: [
