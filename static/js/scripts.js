@@ -1019,7 +1019,7 @@
             originY: "top",
             scaleX: snap_scale_factor,
             scaleY: snap_scale_factor,
-            flipX:true
+            flipX:false
         });
 
 		// add filter
