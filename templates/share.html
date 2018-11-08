@@ -12,16 +12,25 @@
 	<meta property="og:image" content="{{ "http://192.168.0.188:7999/images" + photourl }}" />
 
 	<style type="text/css">
-
+		
+		@font-face {
+		  font-family: 'Noto Serif';
+		  font-style: normal;
+		  font-weight: 400;
+		  src: url(fonts/SourceHanSerifKR-Regular_subset.woff) format('woff');
+		}
 		html, body {
 			margin:0;
-			font-family: 'Arial';
+			font-family: 'Noto Serif';
 		}
 		* {
 			box-sizing: border-box;
 		}
 		body {
-			background-color: #EAEAEA;
+			background-color: #ececea;
+			background-image: url('../img/bg_detail.png');
+			background-size: cover;
+			background-repeat: no-repeat;
 		}
 		.wrapper {
 			display: block;
@@ -34,11 +43,25 @@
 		}
 		.wrap_img img  {
 			width: 100%;
+			vertical-align: bottom;
 		}
 		.wrap_text {
 			text-align: center;
 			padding: 20px 0;
-
+			font-size: 15px;
+			font-weight: 400;
+		}
+		.wrap_text a {
+			position: relative;
+		}
+		.wrap_text a:after {
+		    content: "";
+		    position: absolute;
+		    width: 100%;
+		    bottom: 2px;
+		    left: 0;
+		    height: 3px;
+		    background-color: rgba(44,73,151,0.28);
 		}
 
 
@@ -52,7 +75,8 @@
 			<img src="{{ "https://sbculture.project9.co.kr/images" + photourl }}">
 		</div>
 		<div class="wrap_text">
-			Lorem Ipsum
+			성북구의 또 다른 이야기 보러 가기<br>
+			<a href="https://www.sbculture.org">www.sbculture.org</a>
 		</div>
 
 	</div>
