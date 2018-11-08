@@ -193,6 +193,10 @@
 				    el.style.width = map_markers.features[i].properties.iconSize[0] + "px";
 				    el.style.height = map_markers.features[i].properties.iconSize[1] + "px";
 
+				    el.addEventListener('click', function() {
+				        // window.alert(marker.properties.message);
+				    });
+
 				    // add marker to map
 				    new mapboxgl.Marker(el)
 				        .setLngLat(map_markers.features[i].geometry.coordinates)
@@ -220,9 +224,12 @@
 
 		map.on("click", function(e) {
 			//console.log("clicked", e.originalEvent.path[0]) ;
-			var clicked_element = e.originalEvent.path[0];
+			// event.path || (event.composedPath && event.composedPath()
+			console.log('pos',e)
+			var clicked_element = e.originalEvent.srcElement.className;
+
 			// if not clicking on markers, clear all relations + conencting lines
-			if ( !clicked_element.classList.contains("mapboxgl-canvas") == false ) {
+			if ( clicked_element == "mapboxgl-canvas"  ) {
 				clear_map();
 			}
 		});
@@ -1565,6 +1572,8 @@
 
 	// click on PLACE markers
 	$(document).on("click",".marker_places",function(){
+
+		console.log('clicked marker_places')
 
 		current_place_index = $(this).attr("data-index");
 		var data_code = $(this).attr("data-code");
