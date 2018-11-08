@@ -48,7 +48,40 @@
   src: url(fonts/SourceHanSerifKR-Bold_subset.woff) format('woff');
 }
 
-
+.all_font_loader {
+    position: fixed;
+    z-index: 1;
+    opacity: 0.05;
+    pointer-events: none;
+}
+.all_font_loader .font1 {
+  font-family: 'Arita';
+  font-weight: 500;
+}
+.all_font_loader .font2 {
+  font-family: 'Arita';
+  font-weight: 600;
+}
+.all_font_loader .font3 {
+  font-family: 'Arita';
+  font-weight: 700;
+}
+.all_font_loader .font4 {
+  font-family: 'Noto Serif';
+  font-weight: 400;
+}
+.all_font_loader .font5 {
+  font-family: 'Noto Serif';
+  font-weight: 500;
+}
+.all_font_loader .font6 {
+  font-family: 'Noto Serif';
+  font-weight: 600;
+}
+.all_font_loader .font7 {
+  font-family: 'Noto Serif';
+  font-weight: 700;
+}
 
 
 /** GLOBAL CLASSES **/
