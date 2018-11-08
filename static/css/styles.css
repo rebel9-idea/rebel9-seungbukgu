@@ -1076,8 +1076,11 @@ ul, li {
   height: 100%;
 }
 .ui_cam #snapshot_canvas {
-    width: 100%;
-    display: none;
+    width: 100%;  
+    position: absolute;
+    width: 0;
+    height: 0;
+    overflow: hidden;
 }
 .ui_cam #cam_feed {
   width: 100%;
