@@ -48,6 +48,8 @@
 	// FN load mapbox map
 	function init_mapbox() {
 
+		$(" .ui_intro_bg").fadeIn();
+
 		mapboxgl.accessToken = "pk.eyJ1IjoiZmFyaXNrYXNzaW0iLCJhIjoiSk1MaUthdyJ9.vkxtdDbYdLi524WwlKORBw";
 		map = new mapboxgl.Map({
 		    container: "map",
@@ -225,7 +227,7 @@
 		map.on("click", function(e) {
 			//console.log("clicked", e.originalEvent.path[0]) ;
 			// event.path || (event.composedPath && event.composedPath()
-			console.log('pos',e)
+			// console.log('pos',e)
 			var clicked_element = e.originalEvent.srcElement.className;
 
 			// if not clicking on markers, clear all relations + conencting lines

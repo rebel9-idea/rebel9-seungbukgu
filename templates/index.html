@@ -65,23 +65,50 @@
 
 
 	<div class="ui_intro">
-		<div class="intro_loading">
-			<span>LOADING...</span>
-		</div>
-		<div class="intro_where">
-			<span>당신은 지금<br>어디에 있습니까?</span>
-			<div class="location_check">내 위치 확인</div>
-		</div>
-		<div class="intro_check">
-			<span>CHECKING YOUR LOCATION...</span>
-		</div>
-		<div class="intro_success">
-			<span>YOUR LOCATION IS FOUND.</span>
-			<div class="btn_start">시작</div>
-		</div>
-		<div class="intro_fail">
-			<span>YOUR LOCATION IS UNAVAILABLE</span>
-			<div class="btn_start">시작</div>
+
+		<div class="ui_intro_bg"></div>
+
+		<div class="map_title"><img src="img/title.svg"></div>
+
+		<div class="line_north intro_line"></div>
+		<div class="line_east intro_line"></div>
+
+		<div class="intro_blue_circ"></div>
+
+		<div class="intro_circ_wrap">
+			<div class="intro_dir dir_n">N</div>
+			<div class="intro_dir dir_s">S</div>
+			<div class="intro_dir dir_e">E</div>
+			<div class="intro_dir dir_w">W</div>
+
+
+			<div class="intro_loading intro_circ">
+				<span>로딩 중...</span>
+			</div>
+			<div class="intro_where intro_circ">
+				<span>당신은 지금<br>어디에 있습니까?</span>
+				<div class="location_check">
+					<img src="img/icn/icn_updatelocation.svg">
+					내 위치 확인
+				</div>
+			</div>
+			<div class="intro_check intro_circ">
+				<span>지역을 확인 중입니다</span>
+			</div>
+			<div class="intro_success intro_circ">
+				<span>당신의 위치를 찾았습니다</span>
+				<div class="btn_start">
+					<img src="img/icn/icn_arrow_right.svg">
+					시작
+				</div>
+			</div>
+			<div class="intro_fail intro_circ">
+				<span>당신의 위치를 확인할 수 없습니다</span>
+				<div class="btn_start">
+					<img src="img/icn/icn_arrow_right.svg">
+					시작
+				</div>
+			</div>
 		</div>
 	</div> 
 	<!--/.ui_intro-->
