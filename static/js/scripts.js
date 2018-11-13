@@ -1596,7 +1596,7 @@
 
 
 					$(".meta_chapters").prepend('\
-						<div class="chapters_title">'+data_detail.author.name+'가 남긴 성북구 이야기</div>'
+						<div class="chapters_title">'+data_detail.author.name+'의 성북구 이야기</div>'
 						);
 					$(".meta_chapters").append('\
 							<div class="ribbon"><img src="img/ribbon.svg"></div>'
