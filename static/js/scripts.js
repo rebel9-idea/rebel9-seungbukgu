@@ -49,10 +49,23 @@
 	function init_mapbox() {
 
 		$(" .ui_intro_bg").fadeIn('slow', function(){
+		 //    setTimeout(function(){ 
+		 //    	$(" .ui_intro_bg").addClass('animate');
+			// }, 600);
+		});
 
+
+	    $('.marquee').bind('beforeStarting', function () {
 		    setTimeout(function(){ 
-		    	$(" .ui_intro_bg").addClass('animate');
-			}, 600);
+				$('.marquee').removeClass('hide');
+			}, 1000);
+	        
+	    }).marquee({
+		    speed: 10,
+		    delayBeforeStart: 0,
+		    direction: 'up',
+		    duplicated: true,
+		    startVisible: true
 		});
 
 		mapboxgl.accessToken = "pk.eyJ1IjoiZmFyaXNrYXNzaW0iLCJhIjoiSk1MaUthdyJ9.vkxtdDbYdLi524WwlKORBw";
