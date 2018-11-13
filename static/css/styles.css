@@ -460,7 +460,7 @@ ul, li {
     font-family: 'Arita';
     position: absolute;
     left: 50%;
-    max-width: 150px;
+    width: 150px;
     text-align: center;
     line-height: 1.4;
     transform: translateX(-50%);
@@ -1590,7 +1590,9 @@ and (orientation: landscape) {
   }
   .ui_detail .meta_title_sticky.show {
     top:calc(var(--g-padding) + 65px );
-
+  }
+  .ui_detail .meta_image {
+    padding: 0 100px;
   }
   .detail_bottom_ui {
     bottom: calc(var(--g-padding) + 22.5px );

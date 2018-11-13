@@ -1722,9 +1722,8 @@
 		// if no, directly open details panel instead of zooming in to place marker first
 		// if 1st click, zoom to place marker
 		// if 2nd click, open detail
-
 		// console.log(all_data.places[current_place_index].work.length)
-		if ( $(place_togo).hasClass("show_relations") && from_chapter == false  ) {
+		if ( $(place_togo).hasClass("show_relations") && !from_chapter  ) {
 			// console.log('case1');
 			populate_details("place", current_place_index, data_code);
 		} else {
