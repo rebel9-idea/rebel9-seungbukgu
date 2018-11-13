@@ -179,12 +179,13 @@ def getworkbyid(workcode):
             for chapter in chapters:
                 del chapter['_id']
                 chapters_arr.append(chapter)
+                chapter['place'] = []
                 if ',' in chapter['place_code']:
                     placecodes = chapter['place_code'].split(',')
                 else:
                     placecodes = chapter['place_code']
                 for placecode in placecodes:
-                    chapter['place'] = thedb.Places.collection.find_one({'code': placecode}, {'_id': None})
+                    chapter['place'].append(thedb.Places.collection.find_one({'code': placecode}, {'_id': None}))
                 del chapter['place_code']
             res['chapters'] = chapters_arr
         author = thedb.Authors.collection.find_one({'code': res['author_code']})
