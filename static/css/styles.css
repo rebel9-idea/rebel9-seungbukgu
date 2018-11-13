@@ -237,7 +237,7 @@ ul, li {
 .ui_intro .intro_circ_wrap {
     width: 250px;
     height: 250px;
-    background-color: gray;
+    background-color: #edeeec;
     border-radius: 50%;
     position: fixed;
     top: 50%;
@@ -283,6 +283,11 @@ ul, li {
 }
 .ui_intro .intro_loading.intro_circ {
   /*display: none;*/
+}
+.ui_intro .loading_text {
+    font-size: 16px;
+    text-align: center;
+    font-weight: 500;
 }
 .ui_intro .intro_where.intro_circ {
   top: 57%;
