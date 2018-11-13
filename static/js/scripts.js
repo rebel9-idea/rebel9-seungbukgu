@@ -1225,7 +1225,7 @@
 		        top: 200,
 		        fill: "black",
 		        textAlign : "right",
-		        fill:'#2C4997',
+		        fill:'#000000',
 		        id:"",
 		        fontSize: 10
 	        });
@@ -1237,22 +1237,22 @@
 		        top: 200,
 		        fill: "black",
 		        textAlign : "right",
-		        fill:'#2C4997',
+		        fill:'#000000',
 		        id:"",
 		        fontSize: 10
 	        });
 
 	        
 	        var svgtext3 = new fabric.Text(today_date, { 
-		        fontFamily: "Noto Serif",
+		        fontFamily: "MonoF",
 		        // fontWeight: "bold",
 		        left: 0, 
 		        top: 200,
 		        fill: "black",
 		        textAlign : "right",
-		        fill:'#2C4997',
+		        fill:'#FF8D00',
 		        id:"",
-		        fontSize: 10
+		        fontSize: 12
 	        });
 
 	        svgtext.left = canvas_width - svgtext.width - 10;
@@ -1261,7 +1261,7 @@
 	        svgtext2.left = canvas_width - svgtext2.width - 10;
 	        svgtext2.top = canvas_height - svgtext2.height - 10;
 
-	        svgtext3.left = canvas_width - svgtext3.width - 30;
+	        svgtext3.left = canvas_width - svgtext3.width - 20;
 	        svgtext3.top = canvas_height /* - svgtext.height */ - (canvas_width * 27/100) - 30;
 
 	        d_canvas.add(svgtext);
