@@ -5,7 +5,7 @@
 	// local test domain
 	//var domain = "http://192.168.0.188:7999/"
 	// actual domain
-	var domain = "https://sbculture.project9.co.kr/";
+	var domain = "https://sbmap.co.kr/";
 
 
 	var all_data;
@@ -2130,10 +2130,10 @@
           title: "성북구 - 물 따라 이야기 따라",
           description: "성북구 - 물 따라 이야기 따라 description",
           // 800x800
-          imageUrl: "https://sbculture.project9.co.kr/img/ograph/ograph.jpg",
+          imageUrl: "https://sbmap.co.kr/img/ograph/ograph.jpg",
           link: {
-            mobileWebUrl: "https://sbculture.project9.co.kr",
-            webUrl: "https://sbculture.project9.co.kr"
+            mobileWebUrl: "https://sbmap.co.kr",
+            webUrl: "https://sbmap.co.kr"
           }
         },
         buttons: [
