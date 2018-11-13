@@ -441,13 +441,44 @@ ul, li {
 .showing_relations .marker_places {
   opacity: 0.3;
 }
+.marker_places span {
+  display: none;
+}
+.marker_places.show_relations span {
+    display: table;
+    background-color: #D8D8D8;
+    border: 1px solid;
+    padding: 3px 5px;
+    color: black;
+    font-weight: 600;
+    margin-top: -10px;
+    width: 100%;
+    font-family: 'Arita';
+    position: absolute;
+    left: 50%;
+    max-width: 150px;
+    text-align: center;
+    line-height: 1.4;
+    transform: translateX(-50%);
+}
+.related_author_W00001 .is_related_to_W00001,
+.related_author_W00002 .is_related_to_W00002,
+.related_author_W00003 .is_related_to_W00003,
+.related_author_W00004 .is_related_to_W00004,
+.related_author_W00005 .is_related_to_W00005,
+.related_author_W00006 .is_related_to_W00006,
+.related_author_W00007 .is_related_to_W00007,
+.related_author_W00008 .is_related_to_W00008,
+.related_author_W00009 .is_related_to_W00009,
+.related_author_W000010 .is_related_to_W00010
+ {
+  opacity: 1.0 !important;
+}
 .marker_places.show_relations {
   opacity: 1;
-  /*background-image:url(../img/icn/marker_place_active.svg) !important;*/
   width: 60px !important;
   height: 60px !important;
-  border-radius: 50%;
-  border:2px solid black;
+  z-index: 1;
 }
 .marker_floaters {
     width: auto;
@@ -464,28 +495,132 @@ ul, li {
     text-align: center;
     box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.6);
     cursor: pointer;
+    z-index: 2;
 }
+
+
 .marker_floaters.floater_author {
     background-color: transparent;
     border: none;
     box-shadow: none;
+    top:14px;
+    filter:drop-shadow(0px 1px 1px  rgba(0,0,0,0.5));
+    padding: 0;
+    animation-timing-function: ease-in-out;
 }
+.marker_floaters.floater_author.anim_1 {
+  animation: float_author1 1.5s ease-in-out infinite;
+}
+.marker_floaters.floater_author.anim_2 {
+  animation: float_author1 2s ease-in-out infinite;
+}
+.marker_floaters.floater_author.anim_3 {
+  animation: float_author1 2.5s ease-in-out infinite;
+}
+.marker_floaters.floater_author.anim_4 {
+  animation: float_author1 3s ease-in-out infinite;
+}
+
+@keyframes float_author1 {
+  0% {
+    filter:drop-shadow(0px 1px 1px  rgba(0,0,0,0.5));
+    top:0px;
+  }
+  50% {
+    filter:drop-shadow(0px 10px 5px  rgba(0,0,0,0.1));
+    top: -10px;
+  }
+  100% {
+    filter:drop-shadow(0px 1px 1px  rgba(0,0,0,0.5));
+    top: 0px;
+  }
+}
+
+.marker_floaters.floater_work {
+  animation-timing-function: ease-in-out; 
+}
+.marker_floaters.floater_work.anim_1 {
+    animation: float_work1 1.5s ease-in-out infinite;
+}
+.marker_floaters.floater_work.anim_2 {
+    animation: float_work1 2s ease-in-out infinite;
+}
+.marker_floaters.floater_work.anim_3 {
+    animation: float_work1 2.5s ease-in-out infinite;
+}
+.marker_floaters.floater_work.anim_4 {
+    animation: float_work1 3s ease-in-out infinite;
+}
+@keyframes float_work1 {
+  0% {
+    box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.6);
+    top:0px;
+  }
+  50% {
+    box-shadow: 0px 10px 3px 0px rgba(0,0,0,0.1);
+    top: -12px;
+  }
+  100% {
+    box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.6);
+    top: 0px;
+  }
+}
+
 .author_thumb {
     width: 50px;
     height: 50px;
     overflow: hidden;
     border-radius: 50%;
     border:2px solid black;
+    display: none;
+}
+.floater_author.showing_links .author_thumb {
+  display: block;
 }
 .author_thumb img { 
   width:100%;
 }
 .floater_author span {
-    margin-top: 8px;
+  display: block;
+  background-color: #D8D8D8;
+  border: 1px solid;
+  padding: 5px;
+/*    margin-top: 8px;
     font-size: 18px;
-    display: block;
     font-family: 'Noto Serif';
     font-weight: 600;
+    background-color: #D8D8D8;
+    border: 1px solid black;
+    padding: 5px;*/
+}
+.floater_author.showing_links span {
+  margin-top: -7px;
+  position: relative;
+  z-index: 1;
+}
+
+.place_thumb {
+    width: 22px;
+    height: 30px;
+    position: relative;
+    overflow: hidden;
+}
+.show_relations .place_thumb  {
+    width: 60px;
+    height:60px;
+    border-radius: 50%;
+    border:2px solid black;
+    background-color: #3f3f3f;
+}
+
+.place_thumb img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    overflow: hidden;
 }
 
 /** CONTENT INFO UI **/
@@ -618,6 +753,9 @@ ul, li {
   top: calc(var(--g-padding) + 55px );
   opacity: 1;
 }
+.ui_detail .meta_subtitle_wrap {
+    display: flex;
+}
 .ui_detail .meta_subtitle {
     font-size: 15px;
     line-height: 1.35;
@@ -626,12 +764,15 @@ ul, li {
     font-weight: 500;
     width: fit-content;
     max-width: 50%;
+    flex-basis: 50%;
 }
 .ui_detail .meta_subtitle1 {
     align-self: flex-start;
+    padding-right: 15px;
 } 
 .ui_detail .meta_subtitle2 {
     align-self: flex-end;
+    padding-left: 15px;
 } 
 .ui_detail .meta_subtitle span{
   position: relative; 
@@ -686,12 +827,18 @@ ul, li {
 .ui_detail .meta_chapters span {
   margin-bottom: 35px;
 }
-.chapters_rel {
+.chapter_rel {
     font-size: 12px;
     font-family: 'Arita';
     font-weight: 500;
     width: 80%;
     margin-bottom: 50px;
+}
+.chapter_place_wrap {
+    margin-bottom: 20px;
+}
+.chapter_place {
+    cursor: pointer;
 }
 .ui_detail .meta_chapters .chapter_header {
     display: flex;
@@ -761,7 +908,7 @@ ul, li {
     display: table;
     margin-bottom: 7px;
 }
-.meta_allworks li, .meta_related li {
+.meta_allworks li, .meta_related li, .chapter_place {
     font-size: 18px;
     display: table;
     font-weight: 400;
@@ -770,7 +917,8 @@ ul, li {
 }
 .ui_detail .meta_related li:after,
 .meta_allworks li:after,
-.ui_detail .meta_subtitle span:after {
+.ui_detail .meta_subtitle span:after,
+.chapter_place:after {
     content: "";
     position: absolute;
     width: 100%;
@@ -1265,14 +1413,14 @@ ul, li {
     z-index: 5;
     color: var(--blue-color);
     text-align: right;
-    padding: 14px 27px;
+    padding: 3vw 5vw;
     font-weight: 400;
     font-size: 10px;
 }
 .ratio_guide .location_name {
     position: absolute;
     bottom: 0;
-    padding: 15px 27px;
+    padding: 5vw 5vw;
     right: 0;
     color: var(--blue-color);
     font-size: 10px;
