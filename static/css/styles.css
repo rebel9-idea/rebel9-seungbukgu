@@ -774,6 +774,7 @@ ul, li {
     align-self: flex-end;
     padding-left: 15px;
 } 
+
 .ui_detail .meta_subtitle span{
   position: relative; 
   font-weight: 600;
@@ -1515,6 +1516,10 @@ and (orientation: landscape) {
 
 } 
 
+@media (max-width: 768px) {  
+
+}
+
 @media (max-width: 520px) {  
   #map {
     cursor: pointer;
@@ -1543,6 +1548,68 @@ and (orientation: landscape) {
     left: -36px;
   }
 
+}
+
+@media (min-width: 769px) {  
+  :root {
+      --g-padding: 10px; 
+  }
+  .ui_detail .detail_menu {
+    top: calc(var(--g-padding) + 10px );
+    left: calc(var(--g-padding) + 10px );
+    width: calc(100% - 50px);
+
+  }
+  .ui_detail #meta_wrap {
+      max-width: 768px;
+      margin-left: auto;
+      margin-right: auto;
+  }
+  .type_place .ui_detail .meta_subtitle2 {
+    margin-left: auto;
+  }
+  .ui_detail .meta_title_sticky.show {
+    top:calc(var(--g-padding) + 65px );
+  }
+  .ui_detail .meta_title_sticky {
+    left: calc(var(--g-padding) + 10px );
+    width: calc(100% - calc(var(--g-padding) + 40px ));
+  }
+  .detail_bottom_ui {
+    bottom: calc(var(--g-padding) + 22.5px );
+    right: calc(var(--g-padding) + 22.5px );
+  }
+
+  .ui_map_bottom {
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50%;
+  }
+  .ui_list .list_buttons { 
+    width: 100%;
+    max-width: 768px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .ui_map_bottom, .ui_list .list_buttons {
+    padding: calc(var(--g-padding) + 10px);
+  }
+  .btn_close {
+    top: calc(var(--g-padding) + 10px);
+    right: calc(var(--g-padding) + 10px);
+  }
+  .ui_list .list_content {
+    top: 10px;
+    padding: 50px 20px 120px;
+    height: calc(100% - 100px);
+    width: calc(100% - (var(--g-padding) * 2) * 2.5 );
+    max-width: 768px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .btn_opencam {
+    display: none !important;
+  }
 }
 
 
