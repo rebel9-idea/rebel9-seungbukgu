@@ -873,11 +873,18 @@
 	var closest_place_text;
 	var closest_place_name;
 
+	var today_date;
+
+
     // start camera feed
     function start_camera() {
 
+    	today_date = new Date().toISOString().slice(0, 10);
+
+
     	$('.location_text').empty();
     	$('.location_name').empty();
+    	$('.location_date').html(today_date);
 
     	// BLOCK : look for shortest distance between user and all places
     	closest_location_arr = [];
@@ -1235,17 +1242,36 @@
 		        fontSize: 10
 	        });
 
+	        
+	        var svgtext3 = new fabric.Text(today_date, { 
+		        fontFamily: "Noto Serif",
+		        // fontWeight: "bold",
+		        left: 0, 
+		        top: 200,
+		        fill: "black",
+		        textAlign : "right",
+		        fill:'#2C4997',
+		        id:"",
+		        fontSize: 10
+	        });
+
 	        svgtext.left = canvas_width - svgtext.width - 10;
 	        svgtext.top = canvas_height /* - svgtext.height */ - (canvas_width * 27/100) + 5;
 
 	        svgtext2.left = canvas_width - svgtext2.width - 10;
 	        svgtext2.top = canvas_height - svgtext2.height - 10;
 
+	        svgtext3.left = canvas_width - svgtext3.width - 30;
+	        svgtext3.top = canvas_height /* - svgtext.height */ - (canvas_width * 27/100) - 30;
+
 	        d_canvas.add(svgtext);
 	        d_canvas.bringToFront(svgtext);
 
 	        d_canvas.add(svgtext2);
 	        d_canvas.bringToFront(svgtext2);
+
+	        d_canvas.add(svgtext3);
+	        d_canvas.bringToFront(svgtext3);
 
 
 	        fabric.loadSVGFromURL('img/title.svg' ,function(objects,options){
