@@ -28,7 +28,7 @@
 	var distance_from_seongbukgu;
 	var map_markers;
 	var floaters_markers;
-	var link_lines_features;
+	var link_lines_features_work, link_lines_features_author;
 
 	var supports_location = false;
 	var check_location_interval;
@@ -193,12 +193,25 @@
 
 				    // create place marker and add to map
 				    var el = document.createElement("div");
-				    el.className = "marker_places";
+				    el.className = "marker_places place_"+all_data.places[i].code;;
 				    el.dataset.index = i;
 				    el.dataset.code = all_data.places[i].code;
-				    el.style.backgroundImage = "url(img/icn/marker_place.svg)";
+				    //el.style.backgroundImage = "url(img/icn/marker_place.svg)";
 				    el.style.width = map_markers.features[i].properties.iconSize[0] + "px";
 				    el.style.height = map_markers.features[i].properties.iconSize[1] + "px";
+
+
+				    // append thumbnail image to place marker
+			    	var place_thumb = document.createElement('div');
+			    	place_thumb.className = "place_thumb";
+			    	var place_thumb_img = document.createElement("img");
+			    	place_thumb_img.src = "img/icn/marker_place.svg";
+			    	place_thumb.appendChild(place_thumb_img);
+			    	el.appendChild(place_thumb)
+
+				    var name_span = document.createElement('span')
+				    name_span.innerHTML = all_data.places[i].name;
+				    el.appendChild(name_span);
 
 				    el.addEventListener('click', function() {
 				        // window.alert(marker.properties.message);
@@ -412,12 +425,12 @@
 		        	}
 
 		        	// // hide cam buttons if user not in SBG
-		        	// $(".btn_opencam").hide();
-		        	// $(".ui_map_bottom").addClass("no_cam")
+		        	$(".btn_opencam").hide();
+		        	$(".ui_map_bottom").addClass("no_cam")
 
 		        	// show cam even if user is not in sbg
-					$(".btn_opencam").show();	
-					$(".ui_map_bottom").removeClass("no_cam")
+					// $(".btn_opencam").show();	
+					// $(".ui_map_bottom").removeClass("no_cam")
 
 
 		        	// stop checking interval if user goes out of SBG
@@ -574,11 +587,17 @@
 				]
 
 			    // create marker and add to map
+			    	// random number for random floating anim
+			    	var rand_num = Math.floor(Math.random()*4+1);
+
 				    var el = document.createElement("div");  
-				    el.className = "marker_floaters floater_"+floaters_markers.features[i].properties.markertype;
+				    el.className = "marker_floaters floater_"+floaters_markers.features[i].properties.markertype+" anim_"+rand_num;
 				    el.dataset.index = i;
+				    el.dataset.name = floaters_markers.features[i].properties.name;
 				    el.dataset.code = floaters_markers.features[i].properties.code;
 				    el.dataset.type = floaters_markers.features[i].properties.markertype;
+				    el.dataset.lon = floaters_markers.features[i].geometry.coordinates[1];
+				    el.dataset.lat = floaters_markers.features[i].geometry.coordinates[0];
 
 				    // append thumbnail image to author floater
 				    if (floaters_markers.features[i].properties.markertype == "author") {
@@ -612,10 +631,14 @@
 	// END check_relation()
 
 
+	var author_place_links_arr = []
+
 	// FN draw relation lines between markers
 	function draw_lines(data_index) {
 	 
-		link_lines_features = [];
+		link_lines_features_work = [];
+		link_lines_features_author = [];
+		author_place_links_arr = []
 
 	    for (var i = 0; i < floaters_markers.features.length; i++) {
 
@@ -624,10 +647,10 @@
 
 		    	// set up empty features for single line
 		    	// from coordinates of clicked place marker -> coordinates of related marker
-		    	link_lines_features_to_add = {
+		    	link_lines_features_work_to_add = {
 											    "type": "Feature",
 							                    "properties": {
-							                        "dasharray": [3,3],
+							                        // "dasharray": [3,3],
 							                        "width": 1,
 							                    },
 											    "geometry": {
@@ -639,10 +662,11 @@
 											    }
 											 };
 
-	    		link_lines_features.push(link_lines_features_to_add)
+
+	    		link_lines_features_work.push(link_lines_features_work_to_add)
 	    	};
 
-
+	    	
 	    	//  LINK LINES : author marker to related places 
     	    if (floaters_markers.features[i].properties.markertype == "author") {
 
@@ -650,7 +674,10 @@
 		    	// from coordinates of author marker -> coordinates of related marker
 		    	var related_shortcode = floaters_markers.features[i].properties.related_places
 
-		    	// 2nd loop to draw lines for each related place -> author
+		    	author_place_links_arr[i] = {"index":0, "features":[]}
+
+		    	// 2nd loop 
+		    	// for an author's each related place , draw a line
 
 		    	// stop gap measure to limit author's place relation
 		    	if (related_shortcode.length < 5) {
@@ -658,15 +685,18 @@
 		    	} else {
 		    		var author_place_links = 5;
 		    	}
+
+		    	//console.log('zz',related_shortcode)
 		    	
 
 		    	// for (var y = 0; y < related_shortcode.length; y++) {
 		    	for (var y = 0; y < author_place_links; y++) {
-			    	link_lines_features_to_add = {
+
+			    	link_lines_features_author_to_add = {
 												    "type": "Feature",
 								                    "properties": {
-								                        "dasharray": [0.1,0.1],
-								                        "width": 0.5,
+								                        // "dasharray": [0.1,0.1],
+								                        "width": 0.25,
 								                    },
 												    "geometry": {
 												        "type": "LineString",
@@ -676,33 +706,64 @@
 												        ]
 												    }
 												 };
+
+					$('.place_'+related_shortcode[y].code).addClass('is_related_place is_related_to_'+floaters_markers.features[i].properties.code);
+					// console.log('zzz', related_shortcode[y])
+
+		    		author_place_links_arr[i].index = i;
+		    		author_place_links_arr[i].features[y] = link_lines_features_author_to_add;
 												 
-		    		link_lines_features.push(link_lines_features_to_add)
+		    		//author_place_links_arr[i].features.push(link_lines_features_author_to_add)
 		    	}
+
+
+			    map.addSource("link-lines-source_author"+i, {
+			        "type": "geojson",
+			        "data": {
+			            "type": "FeatureCollection",
+			            "features": author_place_links_arr[i].features
+			        }
+			    });
+			    // 	
+				map.addLayer({
+				    "id": "link-lines-id_author"+i,
+				    "type": "line",
+				    "source": "link-lines-source_author"+i,
+				    "paint": {
+				        "line-color": "#000",
+				        "line-width": ['get', 'width'],
+				        // "line-dasharray": [3,3],
+				        "line-opacity" : 0
+				    }
+				});	    	
+
+
 	    	};
 	    };
 
 
 
-	    map.addSource("link-lines-source", {
+	    map.addSource("link-lines-source_work", {
 	        "type": "geojson",
 	        "data": {
 	            "type": "FeatureCollection",
-	            "features": link_lines_features
+	            "features": link_lines_features_work
 	        }
 	    });
-
 	    // add lines to map
 		map.addLayer({
-		    "id": "link-lines-id",
+		    "id": "link-lines-id_work",
 		    "type": "line",
-		    "source": "link-lines-source",
+		    "source": "link-lines-source_work",
 		    "paint": {
 		        "line-color": "#000",
 		        "line-width": ['get', 'width'],
-		        "line-dasharray": [3,3]
+		        // "line-dasharray": [3,3]
 		    }
-		});	    	
+		});	  
+
+
+
 
 	};
 	// END draw_lines()
@@ -712,22 +773,64 @@
 	function clear_map() {
 		$(".marker_people").remove();
 		$(".marker_floaters").remove();
-		$('.marker_places').css('background-image', 'url(img/icn/marker_place.svg)');	
+		$(".marker_places").find('img').attr('src',"img/icn/marker_place.svg");
+		$(".marker_places").removeClass('is_related_place');
 
 		$(".mapboxgl-canvas-container").removeClass("showing_relations");
 		$(".marker_places").removeClass("show_relations");	
 
 		// remove and reset layers and source on each click
-		if (map.getLayer("link-lines-id") != undefined) {
-			map.removeLayer("link-lines-id");
+		if (map.getLayer("link-lines-id_work") != undefined) {
+			map.removeLayer("link-lines-id_work");
 		}
-		if (map.getSource("link-lines-source") != undefined) {
-			map.removeSource("link-lines-source");
+		if (map.getSource("link-lines-source_work") != undefined) {
+			map.removeSource("link-lines-source_work");
 		}
+
+
+		for (var i = 0; i < author_place_links_arr.length; i++) {
+				
+			if (map.getLayer("link-lines-id_author"+i) != undefined) {
+				map.removeLayer("link-lines-id_author"+i);
+			}
+			if (map.getSource("link-lines-source_author"+i) != undefined) {
+				map.removeSource("link-lines-source_author"+i);
+			}
+
+		}	
+
+		clear_author_place();
+			
 
 	};
 	// END clear_map()
 
+
+	function clear_author() {
+
+		clear_author_place();
+
+		for (var i = 0; i < author_place_links_arr.length; i++) {
+			
+			//console.log(map.getLayer("link-lines-id_author"+i), map.getSource("link-lines-source_author"+i) )
+			if (map.getLayer('link-lines-id_author'+i) != undefined) {
+				map.setPaintProperty('link-lines-id_author'+i, 'line-opacity', 0);	
+			}
+		};
+			
+	};	
+
+	// clear all related_author_.... from .mapboxgl-canvas-container
+	function clear_author_place() {
+	    var cl =  $('.mapboxgl-canvas-container').attr("class").split(" ");
+	    var newcl =[];
+	    for(var i=0;i<cl.length;i++){
+	        r = cl[i].search(/related_author_+/);
+	        if(r)newcl[newcl.length] = cl[i];
+	    }
+	    $('.mapboxgl-canvas-container').removeClass().addClass(newcl.join(" "));  
+	};
+	// END
 
 
 	/*** CAMERA AND SHARE FUNCTIONS ***/
@@ -803,7 +906,7 @@
 	    	$('.location_name').html(closest_place_name);
 				
 	    	// add linebreak '\n' for every nth space in string
-			var n = 9;
+			var n = 8;
 			var ch = ' ';
 			var regex = new RegExp("((?:[^" +ch+ "]*" +ch+ "){" + (n-1) + "}[^" +ch+ "]*)" +ch, "g");
 			closest_place_text = closest_place_text.replace(regex, '$1\n');
@@ -903,22 +1006,19 @@
 
     });
 
+    // init clipboard for copying url
     new ClipboardJS('.copy_url');
 
     $('.copy_url').click(function() {
 		var text = $('.share_modal pre').html();
 		$('.share_modal pre').addClass('copied');
 		$('.copy_url').html('복사하였습니다');
-
     });
-
-
 
     $('.close_share').click(function() {
     	$('.share_modal').fadeOut('fast');
     	$('.camera_buttons').fadeIn('fast');
     });
-
 
     var d_canvas;
     var detectrtc_tested = false;
@@ -1107,7 +1207,7 @@
 		        textAlign : "right",
 		        fill:'#2C4997',
 		        id:"",
-		        fontSize: 10.5
+		        fontSize: 10
 	        });
 
 	        var svgtext2 = new fabric.Text(closest_place_name, { 
@@ -1119,11 +1219,11 @@
 		        textAlign : "right",
 		        fill:'#2C4997',
 		        id:"",
-		        fontSize: 10.5
+		        fontSize: 10
 	        });
 
 	        svgtext.left = canvas_width - svgtext.width - 10;
-	        svgtext.top = canvas_height - svgtext.height - 40;
+	        svgtext.top = canvas_height /* - svgtext.height */ - (canvas_width * 27/100) + 5;
 
 	        svgtext2.left = canvas_width - svgtext2.width - 10;
 	        svgtext2.top = canvas_height - svgtext2.height - 10;
@@ -1323,29 +1423,31 @@
 
 			// subtitle 
 			if (data_type == 'place') {
-				$(".meta_subtitle1").hide()
+				$(".meta_subtitle1").show()
 				$(".meta_subtitle2").show()
+				$(".meta_subtitle1").html('');
 				$(".meta_subtitle2").html(data_detail.address);
 			} 
 			else if (data_type == 'work') {
-				$(".meta_subtitle1").hide()
+				$(".meta_subtitle1").show()
 				$(".meta_subtitle2").show()
 
 				var dob = data_detail.author.dob.toString().replace(/(\d{4})(\d{2})(\d{2})/, "$1.$2.$3");
 				var dod = data_detail.author.dod.toString().replace(/(\d{4})(\d{2})(\d{2})/, "$1.$2.$3");
 
+				$(".meta_subtitle1").html('');
 				$(".meta_subtitle2").html('<span data-type="author" data-code="'+data_detail.author.code+'">'+ data_detail.author.name +'</span><br>'+dob +' - '+dod);
 			}
 			else if (data_type == 'author') {
-				$(".meta_subtitle1").hide()
+
+				$(".meta_subtitle1").show()
 				$(".meta_subtitle2").show()
-				
 
 				var dob = data_detail.dob.toString().replace(/(\d{4})(\d{2})(\d{2})/, "$1.$2.$3");
 				var dod = data_detail.dod.toString().replace(/(\d{4})(\d{2})(\d{2})/, "$1.$2.$3");
 
-
-				$(".meta_subtitle2").html(dob +' - '+dod);
+				$(".meta_subtitle1").html(dob +' - '+dod);
+				$(".meta_subtitle2").html(data_detail.seungbukgu_period);
 			};
 
 
@@ -1355,7 +1457,7 @@
 			if (data_type == 'work') {
 
 				$(".meta_desc").append('\
-					<span>'+data_detail.desc+'</span>\
+					<span>'+data_detail.desc.replace(/\n/g, "<br>")+'</span>\
 					<div class="chapter_header">\
 						<div class="chapter_read read_off">\
 							<div class="tts_read"><img src="img/icn/icn_tts_turnon.svg"> 부분듣기</div>\
@@ -1393,7 +1495,7 @@
 					$(".meta_desc").append('\
 						<div class="ribbon"><img src="img/ribbon.svg"></div>\
 						<div class="chapter_read read_off"><div class="tts_read"><img src="img/icn/icn_tts_turnon.svg"> 전체듣기</div><div class="tts_stopread"><img src="img/icn/icn_tts_turnoff.svg">  듣기종료</div></div>\
-						<span>'+data_detail.desc+'</span>\
+						<span>'+data_detail.desc.replace(/\n/g, "<br>")+'</span>\
 					')
 				} else {
 					$(".meta_desc").hide();
@@ -1422,11 +1524,13 @@
 					$(".meta_chapters").show();
 
 					for (var i = data_detail.chapters.length - 1; i >= 0; i--) {
+
 						$(".meta_chapters").prepend('\
 							<div class="ribbon"><img src="img/ribbon.svg"></div>\
-							<div class="single_chapter">\
-								<span>'+data_detail.chapters[i].desc+'</span>\
-								<div class="chapters_rel">'+data_detail.chapters[i].rel_docs+'</div>\
+							<div class="single_chapter chapter_'+i+'">\
+								<span>'+data_detail.chapters[i].desc.replace(/\n/g, "<br>")+'</span>\
+								<div class="chapter_place_wrap"></div>\
+								<div class="chapter_rel">'+data_detail.chapters[i].rel_docs+'</div>\
 								<div class="chapter_header">\
 									<div class="chapter_read read_off">\
 										<div class="tts_read"><img src="img/icn/icn_tts_turnon.svg"> 부분듣기</div>\
@@ -1436,8 +1540,21 @@
 									</div>\
 								</div>\
 							</div>\
-							')
+							');
+
+						for (var y = 0; y < data_detail.chapters[i].place.length; y++) {
+							if (data_detail.chapters[i].place[y] != null) {
+								$('.chapter_'+i+' .chapter_place_wrap').append('\
+									\
+									<div class="chapter_place" data-code="'+data_detail.chapters[i].place[y].code+'" data-type="place">'+data_detail.chapters[i].place[y].name+'</div>\
+									\
+								')
+							}
+							
+						}
 					}
+
+
 
 					$(".meta_chapters").prepend('\
 						<div class="chapters_title">'+data_detail.author.name+'가 남긴 성북구 이야기</div>'
@@ -1587,10 +1704,18 @@
 	// click on PLACE markers
 	$(document).on("click",".marker_places",function(){
 
+		if ( !$(this).hasClass("show_relations")  ) {
+			$(this).find('img').attr('src', null);
+		}
+		click_place_marker(this);
+	});
+
+	//FN click place marker event 
+	function click_place_marker(place_togo) {
 		console.log('clicked marker_places')
 
-		current_place_index = $(this).attr("data-index");
-		var data_code = $(this).attr("data-code");
+		current_place_index = $(place_togo).attr("data-index");
+		var data_code = $(place_togo).attr("data-code");
 			
 
 		// check if this place has related places
@@ -1599,25 +1724,12 @@
 		// if 2nd click, open detail
 
 		// console.log(all_data.places[current_place_index].work.length)
-		if ( $(this).hasClass("show_relations")  ) {
+		if ( $(place_togo).hasClass("show_relations")  ) {
 			// console.log('case1');
 			populate_details("place", current_place_index, data_code);
 		} else {
 
-			if (all_data.places[current_place_index].work.length == 0) {
-				// console.log('case2');
-				clear_map();
-				map.easeTo(
-				{
-					center 	: [map_markers.features[current_place_index].geometry.coordinates[0], map_markers.features[current_place_index].geometry.coordinates[1]],
-					zoom 	: 15,
-					duration: 600
-				});	
-			    setTimeout(function(){ 
-					populate_details("place", current_place_index, data_code);	
-				}, 400);
 
-			} else {
 				// console.log('case3');
 				map.easeTo(
 					{
@@ -1629,22 +1741,41 @@
 				check_relation(current_place_index);	
 				
 				if ( all_data.places[current_place_index].images.length > 0 ) {
-					$(this).css('background-image', 'url('+domain.substring(0, domain.length - 1)+all_data.places[1].images[0].image_thumb+')');	
+					//$(place_togo).css('background-image', 'url('+domain.substring(0, domain.length - 1)+all_data.places[1].images[0].image_thumb+')');	
+					$(place_togo).find('img').attr('src',domain.substring(0, domain.length - 1)+all_data.places[current_place_index].images[0].image_thumb)
 					console.log('case1')
 				} else {
 					console.log('case2')
-					$(this).css('background-image', 'url(img/icn/marker_places_active_default.png)');	
+					//$(place_togo).css('background-image', 'url(img/icn/marker_places_active_default.png)');	
+					$(place_togo).find('img').attr('src',"img/icn/marker_places_active_default.png");
 				}
 
 				// $(".ui_detail").fadeIn();
 				$('.marker_places').removeClass("show_relations");	
-				$(this).addClass("show_relations");	
+				$(place_togo).addClass("show_relations");	
 				$(".mapboxgl-canvas-container").addClass("showing_relations");
-			}
+
 
 
 		}
-	});
+	};
+
+	// click onauthors
+	$(document).on("click",".floater_author",function(){
+
+		clear_author();
+		$(".mapboxgl-canvas-container").addClass("related_author_"+$(this).attr('data-code'));
+		map.setPaintProperty('link-lines-id_author'+$(this).attr('data-index'), 'line-opacity', 1);
+		map.easeTo(
+			{
+				center 	: [$(this).attr('data-lat'), $(this).attr('data-lon')],
+				zoom 	: 14.8,
+				duration: 600
+			});	
+		// $(".ui_detail").fadeIn();
+		// $(".ui_detail").scrollTop(0);
+	});	
+
 
 	// click on RELATED markers
 	$(document).on("click",".marker_floaters",function(){
@@ -1653,7 +1784,18 @@
 		var related_type = $(this).attr("data-type");
 		var related_code = $(this).attr("data-code");
 
-		populate_details(related_type, current_work_index, related_code);
+		if (related_type == 'work') {
+			populate_details(related_type, current_work_index, related_code);	
+		} 
+		else if (related_type == 'author') {
+			if ( $(this).hasClass('showing_links') ) {
+				populate_details(related_type, current_work_index, related_code);	
+			} else {
+				$('.floater_author').removeClass('showing_links');
+				$(this).addClass('showing_links');
+			}
+		}
+		
 
 		// $(".ui_detail").fadeIn();
 		// $(".ui_detail").scrollTop(0);
@@ -1735,14 +1877,39 @@
 		close_detail()
 	});
 
-	$(document).on("click",".meta_allworks li, .meta_related li, .meta_subtitle1 span",function(){
-		var data_code = $(this).attr('data-code');
-		var data_type = $(this).attr('data-type');
+	$(document).on("click",".meta_allworks li, .meta_related li, .meta_subtitle span",function(){
+		var that = this
+		change_detail_data(that);
+	});
+
+	// click on chapter's place and focus on map
+	$(document).on("click",".chapter_place",function(){
+
+		// case 1 - if user clicks on chapter's place while map didnt load,
+		// change detail page instead
+		if ($('.ui_intro').is(':visible')) {
+			change_detail_data(this);
+		}
+		// case 2 -
+		// if map is already showing, close detail page and focus on place marker
+ 		else {
+			var data_code = $(this).attr('data-code');
+			var data_type = $(this).attr('data-type');
+			click_place_marker('.place_'+data_code);
+			close_detail();
+			$(".ui_list").fadeOut();
+ 		}
+	});
+	
+	// function to change detail page data when click on related items
+	function change_detail_data(that) {
+		var data_code = $(that).attr('data-code');
+		var data_type = $(that).attr('data-type');
 		$('#meta_wrap').fadeOut("fast", function() {
 			populate_details(data_type, null, data_code);	
 		})
-		
-	});
+	};
+
 
 
 	// close detail page and show list
