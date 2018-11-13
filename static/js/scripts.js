@@ -1711,7 +1711,7 @@
 	});
 
 	//FN click place marker event 
-	function click_place_marker(place_togo) {
+	function click_place_marker(place_togo, from_chapter) {
 		console.log('clicked marker_places')
 
 		current_place_index = $(place_togo).attr("data-index");
@@ -1724,7 +1724,7 @@
 		// if 2nd click, open detail
 
 		// console.log(all_data.places[current_place_index].work.length)
-		if ( $(place_togo).hasClass("show_relations")  ) {
+		if ( $(place_togo).hasClass("show_relations") && from_chapter == false  ) {
 			// console.log('case1');
 			populate_details("place", current_place_index, data_code);
 		} else {
@@ -1895,7 +1895,7 @@
  		else {
 			var data_code = $(this).attr('data-code');
 			var data_type = $(this).attr('data-type');
-			click_place_marker('.place_'+data_code);
+			click_place_marker('.place_'+data_code, true);
 			close_detail();
 			$(".ui_list").fadeOut();
  		}
