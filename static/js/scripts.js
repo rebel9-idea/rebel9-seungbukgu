@@ -1546,15 +1546,20 @@
 
 			// related docs
 			if (data_type == 'work') {	
-				$(".meta_rel_doc").show();
-				$(".meta_rel_doc span").html(data_detail.author.rel_docs);
+				if (data_detail.author.rel_docs.length > 0) {
+					$(".meta_rel_doc").show();
+					$(".meta_rel_doc span").html(data_detail.author.rel_docs);	
+				}
+				
 			}
-			else if (data_type == 'author') {
-				$(".meta_rel_doc").show();
-				$(".meta_rel_doc span").html(data_detail.rel_docs);
-			} else {
-				$(".meta_rel_doc").hide();
+			else if (data_type == 'author' || data_type == 'place') {
+				if (data_detail.rel_docs.length > 0) {
+					$(".meta_rel_doc").show();
+					$(".meta_rel_doc span").html(data_detail.rel_docs);	
+				}
+				
 			}
+				
 
 			// work chapters
 			if (data_type == 'work') {	
