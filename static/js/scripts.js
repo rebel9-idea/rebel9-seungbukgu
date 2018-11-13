@@ -1911,7 +1911,7 @@
 	    	if ($(".slider_wrap").hasClass("slick-slider")) {
 	    		$(".meta_image ul")[0].slick.unslick();	
 	    	}
-		}, 600);
+		}, 800);
 	};
 	// END fn close_detail();
 
