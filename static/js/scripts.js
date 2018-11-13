@@ -1244,7 +1244,7 @@
 
 	        
 	        var svgtext3 = new fabric.Text(today_date, { 
-		        fontFamily: "MonoC",
+		        fontFamily: "MonoB",
 		        // fontWeight: "bold",
 		        left: 0, 
 		        top: 200,
