@@ -61,7 +61,7 @@
 			}, 1000);
 	        
 	    }).marquee({
-		    speed: 10,
+		    speed: 7,
 		    delayBeforeStart: 0,
 		    direction: 'up',
 		    duplicated: true,
