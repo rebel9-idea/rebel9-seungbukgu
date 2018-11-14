@@ -713,7 +713,7 @@
 												    "type": "Feature",
 								                    "properties": {
 								                        // "dasharray": [0.1,0.1],
-								                        "width": 0.25,
+								                        "width": 0.5,
 								                    },
 												    "geometry": {
 												        "type": "LineString",
