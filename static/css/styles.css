@@ -673,7 +673,7 @@ ul, li {
     border-radius: 50%;
     border:2px solid black;
     background-color: #3f3f3f;
-    background-image: url(../img/marker_author_active_default);
+    background-image: url(../img/icn/marker_author_active_default);
     background-size: cover;
 }
 
