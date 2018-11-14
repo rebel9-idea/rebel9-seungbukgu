@@ -2132,8 +2132,8 @@
       Kakao.Link.sendDefault({
         objectType: "feed",
         content: {
-          title: "성북구 - 물 따라 이야기 따라",
-          description: "성북구 - 물 따라 이야기 따라 description",
+          title: "물 따라 이야기 따라",
+          description: "성북천을 따라 흘러가는 문학 이야기",
           // 800x800
           imageUrl: "https://sbmap.co.kr/img/ograph/ograph.jpg",
           link: {
