@@ -71,7 +71,7 @@
 		mapboxgl.accessToken = "pk.eyJ1IjoiZmFyaXNrYXNzaW0iLCJhIjoiSk1MaUthdyJ9.vkxtdDbYdLi524WwlKORBw";
 		map = new mapboxgl.Map({
 		    container: "map",
-		    style: "mapbox://styles/rebel9act/cjmxg6xwa1w182roluzcnmsbc",
+		    style: "mapbox://styles/rebel9act/cjogkrufs0ldt2rlyf3y0390i",
 		    center: [127.013387, 37.590479],
 		    maxBounds: [
 	    	// 	// strictly seongbukgu
