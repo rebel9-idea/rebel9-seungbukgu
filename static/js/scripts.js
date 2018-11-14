@@ -536,7 +536,11 @@
 							        }
 
 				// add related works to all-floaters array
-				floaters_markers.features.push(works_to_add);
+				// check if related work has name, (because 박완서 집 has work with empty name, so skip this)
+				if (related_data[i].name.length > 0) {
+					floaters_markers.features.push(works_to_add);	
+				}
+				
 
 
 				// make related authors array, and only if its not duplicate
