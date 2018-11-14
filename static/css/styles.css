@@ -583,15 +583,15 @@ ul, li {
 @keyframes float_author1 {
   0% {
     filter:drop-shadow(0px 1px 1px  rgba(0,0,0,0.5));
-    top:0px;
+    top:10px;
   }
   50% {
     filter:drop-shadow(0px 10px 5px  rgba(0,0,0,0.1));
-    top: -14px;
+    top: -4px;
   }
   100% {
     filter:drop-shadow(0px 1px 1px  rgba(0,0,0,0.5));
-    top: 0px;
+    top: 10px;
   }
 }
 
