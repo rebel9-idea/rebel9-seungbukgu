@@ -424,6 +424,7 @@ ul, li {
     display: flex;
     width: 100%;
     padding: var(--g-padding);
+    z-index: 3;
 }
 .ui_map_bottom > div {
     display: flex;
@@ -1676,7 +1677,6 @@ and (orientation: landscape) {
     left: 50%;
     transform: translateX(-50%);
     width: 50%;
-    z-index: 3;
   }
   .ui_list .list_buttons { 
     width: 100%;
