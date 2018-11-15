@@ -1602,6 +1602,9 @@ and (orientation: landscape) {
   .ui_intro .ui_intro_bg {
     width: 400%;
   }
+  .ui_list .list_content li {
+    font-size: 22px;
+  }
 }
 
 @media (max-width: 520px) {  
@@ -1702,9 +1705,6 @@ and (orientation: landscape) {
     max-width: 768px;
     left: 50%;
     transform: translateX(-50%);
-  }
-  .ui_list .list_content li {
-    font-size: 22px;
   }
   .btn_opencam {
     display: none !important;
