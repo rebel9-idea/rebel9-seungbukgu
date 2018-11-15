@@ -444,13 +444,13 @@ ul, li {
 .ui_map_bottom > div img {
     max-width: 18px;
     position: relative;
-    top: -8px;
+    /*top: -8px;*/
 }
 .ui_map_bottom .btn_opencam img {
   max-width: 24px;
 }
 .ui_map_bottom .btn_listview img {
-  top: -10px;
+  /*top: -10px;*/
 }
 .ui_map_bottom .btn_update_loc {
 	flex:1;
@@ -472,6 +472,7 @@ ul, li {
     font-size: 14px;
     font-weight: 600;
     text-align: center;
+    display: none;
 }
 .ui_map_bottom .btn_opencam label img {
   width:100%;
@@ -972,7 +973,7 @@ ul, li {
 .ui_detail .meta_related li {
     position: relative;
     display: table;
-    margin-bottom: 7px;
+    margin-bottom: 18px;
 }
 .meta_allworks li, .meta_related li, .chapter_place {
     font-size: 18px;
@@ -980,17 +981,18 @@ ul, li {
     font-weight: 400;
     position: relative;
     cursor: pointer;
+    margin-bottom: 18px;
 }
 .ui_detail .meta_related li:after,
 .meta_allworks li:after,
 .ui_detail .meta_subtitle span:after,
 .chapter_place:after {
-    content: "";
+	content: "";
     position: absolute;
     width: 100%;
-    bottom: 2px;
+    bottom: -3px;
     left: 0;
-    height: 3px;
+    height: 2px;
     background-color: rgba(44,73,151,0.28);
 }
 .ui_detail .meta_subtitle span:after {
@@ -1153,23 +1155,23 @@ ul, li {
 .ui_list .list_content li {
   position: relative;
   font-family: Arita;
-  font-size: 20px;
+  font-size: 30px;
   font-weight: 600;
   color: black;
   display: table;
-  margin-bottom: 10px;
+  margin-bottom: 25px;
   cursor: pointer;
 
 }
 .ui_list .list_content li:after {
-  content: "";
-  position: absolute;
-  width: 100%;
-  bottom: 8px;
-  left: 0;
-  height: 3px;
-  background-color: var(--blue-color);
-  opacity: 0.5;
+	content: "";
+	position: absolute;
+	width: 100%;
+	bottom: 2px;
+	left: 0;
+	height: 2px;
+	background-color: var(--blue-color);
+	opacity: 0.5;
 }
 .ui_list .list_buttons {
   position: fixed;
@@ -1182,17 +1184,18 @@ ul, li {
 }
 .ui_list .list_buttons .active {
   pointer-events: none;
-  background-color: var(--blue-color);
+  background-color: rgba(44,73, 151,0.8);
   color: white;
 }
 .ui_list .list_buttons li {
   border: 1px solid black;
   border-right: none;
-  background-color: #fff;
+  background-color: #EAEAEA;
   color: var(--blue-color);
   text-align: center;
   padding: 13px;
   flex:1;
+  font-family: 'Arita';
   font-size: 14px;
   font-weight: 600;
   transition: 0.2s background-color ease-in-out, 0.2s color ease-in-out;
