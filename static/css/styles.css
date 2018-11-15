@@ -663,8 +663,8 @@ ul, li {
 }
 
 .place_thumb {
-    width: 26px;
-    height: 30px;
+    width: 30px;
+    height: 34px;
     position: relative;
     overflow: hidden;
     filter: drop-shadow(0px 1px 1px  rgba(0,0,0,0.5));
@@ -973,7 +973,7 @@ ul, li {
 .ui_detail .meta_related li {
     position: relative;
     display: table;
-    margin-bottom: 18px;
+    margin-bottom: 13px;
 }
 .meta_allworks li, .meta_related li, .chapter_place {
     font-size: 18px;
@@ -981,7 +981,7 @@ ul, li {
     font-weight: 400;
     position: relative;
     cursor: pointer;
-    margin-bottom: 18px;
+    margin-bottom: 13px;
 }
 .ui_detail .meta_related li:after,
 .meta_allworks li:after,
@@ -990,7 +990,7 @@ ul, li {
 	content: "";
     position: absolute;
     width: 100%;
-    bottom: -3px;
+    bottom: 0px;
     left: 0;
     height: 2px;
     background-color: rgba(44,73,151,0.28);
@@ -1160,6 +1160,8 @@ ul, li {
   color: black;
   display: table;
   margin-bottom: 25px;
+  margin-left: auto;
+  margin-right: auto;
   cursor: pointer;
 
 }
